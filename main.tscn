@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://mxtta0nsvjlf"]
+
+[ext_resource type="Texture2D" uid="uid://dpji7gi6hs6be" path="res://assets/kenney_prototypetextures/PNG/Dark/texture_09.png" id="1_jo85n"]
+[ext_resource type="PackedScene" uid="uid://cyqkh0m7cgmah" path="res://player_character.tscn" id="2_62vko"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikqme"]
+size = Vector3(1000, 0.1, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuq6m"]
+albedo_texture = ExtResource("1_jo85n")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ardwq"]
+material = SubResource("StandardMaterial3D_vuq6m")
+size = Vector3(1000, 0.1, 1000)
+
+[sub_resource type="Environment" id="Environment_qr5bp"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ikqme")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ardwq")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_62vko")]
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qr5bp")
