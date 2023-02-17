@@ -5,8 +5,8 @@ var target_speed : Vector3
 var accel : float
 var hvel : Vector3
 
-@onready var head  : Node3D = $Head
-@onready var camera : Camera3D = $Head/Camera3D
+@onready var head  : Node3D = $Body/Head
+@onready var camera : Camera3D = $Body/Head/Camera3D
 
 @export var GRAVITY = -80
 @export var MAX_SPEED: float = 10.0

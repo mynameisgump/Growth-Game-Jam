@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://mxtta0nsvjlf"]
+[gd_scene load_steps=9 format=3 uid="uid://mxtta0nsvjlf"]
 
 [ext_resource type="Texture2D" uid="uid://dpji7gi6hs6be" path="res://assets/kenney_prototypetextures/PNG/Dark/texture_09.png" id="1_jo85n"]
 [ext_resource type="PackedScene" uid="uid://cyqkh0m7cgmah" path="res://player_character.tscn" id="2_62vko"]
@@ -8,16 +8,26 @@ size = Vector3(1000, 0.1, 1000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuq6m"]
 albedo_texture = ExtResource("1_jo85n")
-uv1_scale = Vector3(100, 100, 100)
+uv1_scale = Vector3(1000, 1000, 1000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ardwq"]
 material = SubResource("StandardMaterial3D_vuq6m")
 size = Vector3(1000, 0.1, 1000)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vseqq"]
+
+[sub_resource type="Sky" id="Sky_52dbb"]
+sky_material = SubResource("ProceduralSkyMaterial_vseqq")
+
 [sub_resource type="Environment" id="Environment_qr5bp"]
-background_mode = 1
+background_mode = 2
 background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 3.0
+sky = SubResource("Sky_52dbb")
 ambient_light_color = Color(1, 1, 1, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1263
+volumetric_fog_emission = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -32,6 +42,7 @@ mesh = SubResource("BoxMesh_ardwq")
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_62vko")]
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qr5bp")

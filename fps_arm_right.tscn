@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://de3gu2y5pw85u"]
+
+[ext_resource type="PackedScene" uid="uid://bnwu4omgpqg0h" path="res://assets/FPS_Arm_Right.glb" id="1_x2mkq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vv1of"]
+albedo_color = Color(1, 0, 0.141176, 1)
+
+[node name="FPS_Arm_Right" instance=ExtResource("1_x2mkq")]
+
+[node name="Cube001_0002" parent="FPS_Gun/Root002/Cube031" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vv1of")

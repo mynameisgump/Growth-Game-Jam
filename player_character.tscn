@@ -1,11 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyqkh0m7cgmah"]
+[gd_scene load_steps=10 format=3 uid="uid://cyqkh0m7cgmah"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_qhbey"]
+[ext_resource type="Script" path="res://Hand.gd" id="2_g10aa"]
 [ext_resource type="Script" path="res://Head.gd" id="2_lvxga"]
+[ext_resource type="PackedScene" uid="uid://de3gu2y5pw85u" path="res://fps_arm_right.tscn" id="5_agcum"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b45a5"]
+
+[sub_resource type="Animation" id="Animation_8aspr"]
+resource_name = "RevolverFire"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head/Hand/FPS_Arm_Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0277904, -0.223666, 0), Vector3(0.028, -0.224, 0.5), Vector3(0.028, -0.224, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Head/Hand/FPS_Arm_Right:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(-0.811578, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fpluh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head/Hand/FPS_Arm_Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0277904, -0.223666, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Head/Hand/FPS_Arm_Right:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jebfa"]
+_data = {
+"RESET": SubResource("Animation_fpluh"),
+"RevolverFire": SubResource("Animation_8aspr")
+}
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 script = ExtResource("1_qhbey")
@@ -16,10 +78,27 @@ shape = SubResource("CapsuleShape3D_fi26c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_b45a5")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Body" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72367, 0)
 script = ExtResource("2_lvxga")
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Head" type="Node3D" parent="Body"]
+
+[node name="Camera3D" type="Camera3D" parent="Body/Head"]
+
+[node name="GunRay" type="RayCast3D" parent="Body/Head/Camera3D"]
+target_position = Vector3(0, 0, -200)
+
+[node name="Hand" type="Node3D" parent="Body/Head"]
+script = ExtResource("2_g10aa")
+
+[node name="FPS_Arm_Right" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+transform = Transform3D(-0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, 0.0277904, -0.223666, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jebfa")
+}
