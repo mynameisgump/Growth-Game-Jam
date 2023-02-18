@@ -1,22 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://mxtta0nsvjlf"]
+[gd_scene load_steps=12 format=3 uid="uid://mxtta0nsvjlf"]
 
-[ext_resource type="Texture2D" uid="uid://dpji7gi6hs6be" path="res://assets/kenney_prototypetextures/PNG/Dark/texture_09.png" id="1_jo85n"]
 [ext_resource type="Script" path="res://main.gd" id="1_naapg"]
 [ext_resource type="PackedScene" uid="uid://cyqkh0m7cgmah" path="res://player_character.tscn" id="2_62vko"]
 [ext_resource type="PackedScene" uid="uid://kngc42vfvm6r" path="res://Grumpt.tscn" id="3_joqes"]
+[ext_resource type="Material" uid="uid://c8fbstovowvsw" path="res://Plane_Basic_Mat.tres" id="4_6wgvx"]
 [ext_resource type="Texture2D" uid="uid://c40bpe5elvw25" path="res://assets/crosshairpack_kenney/PNG/White/crosshair001.png" id="4_y518b"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vseqq"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x871c"]
 
 [sub_resource type="Sky" id="Sky_52dbb"]
-sky_material = SubResource("ProceduralSkyMaterial_vseqq")
+sky_material = SubResource("ProceduralSkyMaterial_x871c")
 
 [sub_resource type="Environment" id="Environment_qr5bp"]
 background_mode = 2
 background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 3.0
 sky = SubResource("Sky_52dbb")
-ambient_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.33
 volumetric_fog_density = 0.1263
 volumetric_fog_emission = Color(1, 1, 1, 1)
@@ -27,13 +26,11 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 cell_height = 0.1
 vertices_per_polygon = 3.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuq6m"]
-albedo_texture = ExtResource("1_jo85n")
-uv1_scale = Vector3(1000, 1000, 1000)
-
 [sub_resource type="BoxMesh" id="BoxMesh_ardwq"]
-material = SubResource("StandardMaterial3D_vuq6m")
+material = ExtResource("4_6wgvx")
 size = Vector3(500, 0.1, 500)
+subdivide_width = 32
+subdivide_depth = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikqme"]
 size = Vector3(500, 0.1, 500)
@@ -57,6 +54,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686233, -11.2578)
 navigation_mesh = SubResource("NavigationMesh_i7cg8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
 mesh = SubResource("BoxMesh_ardwq")
 skeleton = NodePath("")
 

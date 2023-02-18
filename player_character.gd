@@ -52,11 +52,13 @@ func fire():
 			animation.play("RevolverFire")
 			if gun_raycast.is_colliding():
 				var target = gun_raycast.get_collider()
-				
-				if target.is_in_group("enemy"):
+				print(target)
+				if target.is_in_group("Limbs"):
 					print(target)
 					var part_hit = target.get_child(gun_raycast.get_collider_shape()).name
-					target.damage(part_hit)
+					target.get_parent().get_parent().damage(part_hit)
+#					else:
+#						target.damage(part_hit)
 					print(part_hit)
 					print("Get Get Get Get Got Got Got Got")
 
