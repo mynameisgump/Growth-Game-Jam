@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://kngc42vfvm6r"]
+[gd_scene load_steps=29 format=3 uid="uid://kngc42vfvm6r"]
 
 [ext_resource type="Script" path="res://Grumpt.gd" id="1_jxrsg"]
+[ext_resource type="Shader" path="res://Grumpt_Burn.gdshader" id="2_ajww5"]
 [ext_resource type="Material" uid="uid://c04712bv0imur" path="res://scenes/Grumpt-Blood.tres" id="2_dyuex"]
 [ext_resource type="Material" uid="uid://cemkv6be3u2s1" path="res://Flesh.tres" id="2_jr32u"]
 [ext_resource type="SphereMesh" uid="uid://dgk7kg1bk5gyw" path="res://scenes/blud.tres" id="3_hbkj0"]
-[ext_resource type="Material" uid="uid://cv0vjs3jsqfx4" path="res://Burn_Mat.tres" id="3_nauvy"]
 [ext_resource type="PackedScene" uid="uid://bwpsxgop4kp1k" path="res://scenes/gib.tscn" id="4_725t8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5qp7"]
@@ -122,6 +122,45 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mgve1")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ojlg8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vmco3"]
+width = 1280
+height = 1280
+noise = SubResource("FastNoiseLite_ojlg8")
+
+[sub_resource type="ImageTexture" id="ImageTexture_px2y1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66jgr"]
+render_priority = 0
+shader = ExtResource("2_ajww5")
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_amount = 0.0
+shader_parameter/burn_size = 0.0
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yy5pa"]
+render_priority = 0
+shader = ExtResource("2_ajww5")
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_amount = 0.0
+shader_parameter/burn_size = 0.0
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2auc"]
+render_priority = 0
+shader = ExtResource("2_ajww5")
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_amount = 0.0
+shader_parameter/burn_size = 0.0
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_12hil"]
 spread = 10.0
 gravity = Vector3(-10, 0, 0)
@@ -145,10 +184,83 @@ turbulence_noise_speed_random = 5.05
 
 [sub_resource type="Animation" id="Animation_r3fmt"]
 resource_name = "Running"
-length = 5.0
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftLegMesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0021161, -3.13984, 0.00120733), Vector3(1.5708, 3.14038, 0), Vector3(-8.74227e-08, -1.69353e-10, -3.14038), Vector3(-1.5708, -3.14038, 0), Vector3(3.85869e-14, -3.14159, 0.00121108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightLegMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RightLegMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0021161, -3.13984, 0.00120733), Vector3(-1.5708, -3.14038, 0), Vector3(8.74227e-08, 5.29379e-11, -3.14038), Vector3(1.5708, 3.14038, 0), Vector3(-2.97052e-14, 3.14159, 0.00121108)]
+}
 
 [sub_resource type="Animation" id="Animation_331l1"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightLegMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.40813, 1.2559, 0.0444609)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightLegMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, -3.14038, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftLegMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0021161, -3.13984, 0.00120733)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35nqj"]
 _data = {
@@ -181,7 +293,7 @@ transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 0, 1.235
 shape = SubResource("BoxShape3D_4g1d5")
 
 [node name="LeftLegMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.299999, 0.00036331, -0.000525748, 0.000362197, 0.3, 0.000634831, 0.000526516, 0.000634195, -0.299999, -0.414126, 1.25293, 0.0375106)
+transform = Transform3D(-0.299999, 0.00036331, -0.000525757, 0.000362197, 0.3, 0.000634831, 0.000526524, 0.000634196, -0.299999, -0.414126, 1.25293, 0.0375106)
 layers = 17
 mesh = SubResource("ArrayMesh_hecdd")
 skeleton = NodePath("")
@@ -196,7 +308,7 @@ transform = Transform3D(-3.33333, -1.27602e-09, -5.03846e-07, 2.5484e-09, 3.3333
 shape = SubResource("CylinderShape3D_5y2wl")
 
 [node name="RightLegMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.299999, 0.00036331, -0.000525748, 0.000362197, 0.299999, 0.00063483, 0.000526515, 0.000634194, -0.299999, 0.40813, 1.2559, 0.0444609)
+transform = Transform3D(-0.3, 0.000363324, 1.58814e-11, 0, -1.31134e-08, 0.3, 0.000363324, 0.3, 1.31134e-08, 0.40813, 1.2559, 0.0444609)
 mesh = SubResource("ArrayMesh_nrihj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_jr32u")
@@ -214,21 +326,21 @@ transform = Transform3D(-0.3, 0, 4.52987e-08, 0, 0.3, 0, -4.52987e-08, 0, -0.3, 
 visible = false
 mesh = SubResource("ArrayMesh_ujn87")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_nauvy")
+surface_material_override/0 = SubResource("ShaderMaterial_66jgr")
 
 [node name="LeftLegBurnt" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.299999, 0.00036331, -0.000525748, 0.000362197, 0.3, 0.000634831, 0.000526516, 0.000634195, -0.299999, -0.414126, 1.25293, 0.0375106)
 visible = false
 mesh = SubResource("ArrayMesh_hecdd")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_nauvy")
+surface_material_override/0 = SubResource("ShaderMaterial_yy5pa")
 
 [node name="RightLegBurnt" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.299999, 0.00036331, -0.000525748, 0.000362197, 0.299999, 0.00063483, 0.000526515, 0.000634194, -0.299999, 0.40813, 1.2559, 0.0444609)
 visible = false
 mesh = SubResource("ArrayMesh_nrihj")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_nauvy")
+surface_material_override/0 = SubResource("ShaderMaterial_n2auc")
 
 [node name="LeftBlood" type="GPUParticles3D" parent="."]
 transform = Transform3D(-0.999931, 0, 0.0117458, 0, 1, 0, -0.0117458, 0, -0.999931, -0.520314, 1.30449, 0.00673729)
@@ -299,10 +411,11 @@ draw_pass_1 = ExtResource("3_hbkj0")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_35nqj")
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="HurtBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.955986, 0)
 shape = SubResource("BoxShape3D_olcl3")

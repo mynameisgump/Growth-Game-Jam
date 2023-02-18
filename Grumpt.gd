@@ -24,6 +24,8 @@ extends CharacterBody3D
 @export var movement_speed : float = 4.0
 @onready var nav_agent : NavigationAgent3D = get_node("NavigationAgent3D")
 
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+
 var movement_delta : float
 var SPEED = 3.0;
 var dead = false;
@@ -66,10 +68,11 @@ func burn_torso():
 	else:
 		torso_burning = false;
 		torso_burn.visible=false;
-	
-	
 
 func _physics_process(delta):
+
+	animation_player.play("Running")
+	
 	if not dead:
 		var current_location = global_transform.origin
 		var next_location = nav_agent.get_next_path_position()
