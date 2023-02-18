@@ -46,10 +46,11 @@ height = 0.495635
 
 [node name="Gib" type="RigidBody3D"]
 collision_layer = 8
-collision_mask = 3
+freeze = true
 
 [node name="GibMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0233993, 0, 0, 0, -1.02281e-09, -0.0233993, 0, 0.0233993, -1.02281e-09, 0, 0, 0)
+layers = 8
 mesh = SubResource("ArrayMesh_b883a")
 skeleton = NodePath("")
 

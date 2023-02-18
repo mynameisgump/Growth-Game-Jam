@@ -19,6 +19,8 @@ var hvel : Vector3
 @export var DEACCEL= 0.86
 @export var MAX_SLOPE_ANGLE = 40
 
+
+
 # Speed Parameter
 const SPEED = 7.0
 # Jump Velocity Parameter

@@ -4,10 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://blbfeybtljop0" path="res://assets/others_0001_2k_eG7C2b(1)/others_0001_normal_directx_2k.png" id="2_eam1t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlegv"]
-specular_mode = 1
 albedo_texture = ExtResource("1_4iugr")
 normal_enabled = true
 normal_texture = ExtResource("2_eam1t")
+billboard_mode = 1
+grow_amount = 3.765
 
 [resource]
 material = SubResource("StandardMaterial3D_xlegv")
