@@ -94,7 +94,7 @@ script = ExtResource("2_lvxga")
 
 [node name="GunRay" type="RayCast3D" parent="Body/Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0026871)
-target_position = Vector3(0, 0, -200)
+target_position = Vector3(0, 0, -1000)
 collision_mask = 16
 collide_with_areas = true
 
