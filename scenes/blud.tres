@@ -1,0 +1,15 @@
+[gd_resource type="SphereMesh" load_steps=4 format=3 uid="uid://dgk7kg1bk5gyw"]
+
+[ext_resource type="Texture2D" uid="uid://ccy5bynt23gms" path="res://assets/others_0001_2k_eG7C2b(1)/others_0001_color_2k.jpg" id="1_4iugr"]
+[ext_resource type="Texture2D" uid="uid://blbfeybtljop0" path="res://assets/others_0001_2k_eG7C2b(1)/others_0001_normal_directx_2k.png" id="2_eam1t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlegv"]
+specular_mode = 1
+albedo_texture = ExtResource("1_4iugr")
+normal_enabled = true
+normal_texture = ExtResource("2_eam1t")
+
+[resource]
+material = SubResource("StandardMaterial3D_xlegv")
+radius = 0.1
+height = 0.2

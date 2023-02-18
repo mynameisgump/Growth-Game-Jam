@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://kngc42vfvm6r"]
+[gd_scene load_steps=15 format=3 uid="uid://kngc42vfvm6r"]
 
 [ext_resource type="Script" path="res://Grumpt.gd" id="1_jxrsg"]
-[ext_resource type="Texture2D" uid="uid://ccy5bynt23gms" path="res://assets/others_0001_2k_eG7C2b(1)/others_0001_color_2k.jpg" id="2_rqugq"]
-[ext_resource type="Texture2D" uid="uid://blbfeybtljop0" path="res://assets/others_0001_2k_eG7C2b(1)/others_0001_normal_directx_2k.png" id="3_lifs4"]
+[ext_resource type="Material" uid="uid://c04712bv0imur" path="res://scenes/Grumpt-Blood.tres" id="2_dyuex"]
+[ext_resource type="SphereMesh" uid="uid://dgk7kg1bk5gyw" path="res://scenes/blud.tres" id="3_hbkj0"]
 [ext_resource type="PackedScene" uid="uid://bwpsxgop4kp1k" path="res://scenes/gib.tscn" id="4_725t8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4g1d5"]
@@ -113,23 +113,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_la781")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bqvh5"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_igtho"]
 spread = 10.0
-gravity = Vector3(-10, 0, 0)
-initial_velocity_min = 22.47
-initial_velocity_max = 22.47
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlegv"]
-albedo_texture = ExtResource("2_rqugq")
-normal_enabled = true
-normal_texture = ExtResource("3_lifs4")
-
-[sub_resource type="SphereMesh" id="SphereMesh_som0n"]
-material = SubResource("StandardMaterial3D_xlegv")
-radius = 0.1
-height = 0.2
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = -10.0
+initial_velocity_max = 10.0
+linear_accel_min = -56.18
+linear_accel_max = 22.47
+turbulence_enabled = true
+turbulence_noise_scale = 0.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["enemy"]]
+collision_mask = 7
 script = ExtResource("1_jxrsg")
 
 [node name="TorsoHit" type="CollisionShape3D" parent="."]
@@ -168,17 +163,19 @@ one_shot = true
 explosiveness = 0.5
 visibility_aabb = AABB(-8.49296, -4, -4, 16.9859, 8, 8)
 trail_lifetime = 3.0
-process_material = SubResource("ParticleProcessMaterial_bqvh5")
-draw_pass_1 = SubResource("SphereMesh_som0n")
+process_material = ExtResource("2_dyuex")
+draw_pass_1 = ExtResource("3_hbkj0")
 
 [node name="LeftBlood" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.999958, 0, -0.00921523, 0, 1, 0, 0.00921523, 0, 0.999958, 0.43889, 1.30449, 0.00673729)
 emitting = false
 amount = 500
+lifetime = 5.0
+one_shot = true
 visibility_aabb = AABB(-8.49296, -4, -4, 16.9859, 8, 8)
 trail_lifetime = 3.0
-process_material = SubResource("ParticleProcessMaterial_bqvh5")
-draw_pass_1 = SubResource("SphereMesh_som0n")
+process_material = ExtResource("2_dyuex")
+draw_pass_1 = ExtResource("3_hbkj0")
 
 [node name="LeftLegGibs" type="Node3D" parent="."]
 
@@ -208,3 +205,15 @@ visible = false
 [node name="Gib3" parent="RightLegGibs" instance=ExtResource("4_725t8")]
 transform = Transform3D(0.915599, 0.402092, 0, -0.402092, 0.915599, 0, 0, 0, 1, 0.602798, 0.439616, -0.0269542)
 visible = false
+
+[node name="TorsoBlood" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160028, 0)
+emitting = false
+amount = 1000
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+trail_lifetime = 2.78
+process_material = SubResource("ParticleProcessMaterial_igtho")
+draw_pass_1 = ExtResource("3_hbkj0")
