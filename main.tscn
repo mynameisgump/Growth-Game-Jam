@@ -49,11 +49,11 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qr5bp")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("3_joqes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.99252)
-
 [node name="Hud" type="Node2D" parent="."]
 
 [node name="Crosshair001" type="Sprite2D" parent="Hud"]
 position = Vector2(578, 328)
 texture = ExtResource("4_y518b")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_joqes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.88782)
