@@ -90,6 +90,7 @@ script = ExtResource("2_lvxga")
 [node name="Camera3D" type="Camera3D" parent="Body/Head"]
 
 [node name="GunRay" type="RayCast3D" parent="Body/Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0026871)
 target_position = Vector3(0, 0, -200)
 
 [node name="Hand" type="Node3D" parent="Body/Head"]

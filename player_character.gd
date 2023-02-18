@@ -7,6 +7,8 @@ var hvel : Vector3
 
 @onready var head  : Node3D = $Body/Head
 @onready var camera : Camera3D = $Body/Head/Camera3D
+@onready var animation : AnimationPlayer = $AnimationPlayer
+@onready var gun_raycast : RayCast3D = $Body/Head/Camera3D/GunRay
 
 @export var GRAVITY = -80
 @export var MAX_SPEED: float = 10.0
@@ -39,7 +41,22 @@ var LEAN_SPEED = 5
 func _physics_process(delta : float) -> void:
 	handle_input(delta)
 	handle_movement(delta)
+	fire()
 
+func fire():
+	if Input.is_action_pressed("mouse_fire"):
+		if not animation.is_playing():
+			print("Pew")
+			animation.play("RevolverFire")
+			if gun_raycast.is_colliding():
+				var target = gun_raycast.get_collider()
+				
+				if target.is_in_group("enemy"):
+					print(target)
+					var part_hit = target.get_child(gun_raycast.get_collider_shape()).name
+					target.damage(part_hit)
+					print(part_hit)
+					print("Get Get Get Get Got Got Got Got")
 
 func handle_input(delta : float) -> void:
 	
@@ -70,7 +87,7 @@ func handle_movement(delta : float) -> void:
 		hvel = Vector3.ZERO
 	
 	var speed = hvel.dot(direction)
-	print(speed)
+
 	var accel = clamp(MAX_SPEED - speed, 0.0, MAX_ACCEL * delta)
 	hvel += direction * accel
 	
@@ -82,3 +99,5 @@ func handle_movement(delta : float) -> void:
 	head.rotation.z = z_tilt
 
 	move_and_slide()
+	
+

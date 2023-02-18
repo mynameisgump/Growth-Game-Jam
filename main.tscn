@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://mxtta0nsvjlf"]
+[gd_scene load_steps=11 format=3 uid="uid://mxtta0nsvjlf"]
 
 [ext_resource type="Texture2D" uid="uid://dpji7gi6hs6be" path="res://assets/kenney_prototypetextures/PNG/Dark/texture_09.png" id="1_jo85n"]
 [ext_resource type="PackedScene" uid="uid://cyqkh0m7cgmah" path="res://player_character.tscn" id="2_62vko"]
+[ext_resource type="PackedScene" uid="uid://kngc42vfvm6r" path="res://Grumpt.tscn" id="3_joqes"]
+[ext_resource type="Texture2D" uid="uid://c40bpe5elvw25" path="res://assets/crosshairpack_kenney/PNG/White/crosshair001.png" id="4_y518b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikqme"]
 size = Vector3(1000, 0.1, 1000)
@@ -25,7 +27,7 @@ background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 3.0
 sky = SubResource("Sky_52dbb")
 ambient_light_color = Color(1, 1, 1, 1)
-volumetric_fog_enabled = true
+fog_light_energy = 0.33
 volumetric_fog_density = 0.1263
 volumetric_fog_emission = Color(1, 1, 1, 1)
 
@@ -46,3 +48,12 @@ visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qr5bp")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_joqes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.99252)
+
+[node name="Hud" type="Node2D" parent="."]
+
+[node name="Crosshair001" type="Sprite2D" parent="Hud"]
+position = Vector2(578, 328)
+texture = ExtResource("4_y518b")
