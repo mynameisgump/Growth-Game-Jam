@@ -76,6 +76,17 @@ mouse_fire={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="Terrain"
+3d_render/layer_2="Player"
+3d_render/layer_3="Enemies"
+3d_render/layer_4="Gibs"
+3d_physics/layer_1="Terrain"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Gibs"
+
 [player]
 
 look_sensitivity=0.05
