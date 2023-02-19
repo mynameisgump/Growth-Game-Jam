@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c40bpe5elvw25" path="res://assets/crosshairpack_kenney/PNG/White/crosshair001.png" id="5_xv4ws"]
 [ext_resource type="Texture2D" uid="uid://b22jv3p1s6la2" path="res://assets/crosshairpack_kenney/PNG/Outline Retina/crosshair063.png" id="6_pqfsi"]
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/DivineLight.woff" id="7_3dtsa"]
-[ext_resource type="Shader" path="res://attempt3gonnacry.gdshader" id="9_bhayg"]
+[ext_resource type="Shader" path="res://player_character.gdshader" id="8_w45lp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
@@ -125,16 +125,73 @@ _data = {
 "RevolverFire2": SubResource("Animation_w0d15")
 }
 
+[sub_resource type="Shader" id="Shader_dnurj"]
+code = "shader_type canvas_item;
+// noisePulse() by @yonatan
+// https://twigl.app/?ol=true&ss=-NNIajM4aEzy75lqtAUd
+// https://twitter.com/zozuar
+
+mat2 rotate2D(float r){
+    return mat2(vec2(cos(r), sin(r)),vec2( -sin(r), cos(r)));
+}
+
+float noisePulse(in vec2 p, in float t){
+
+    vec2 n,q;
+    float d=dot(p,p),S=9.,i,a,j;
+    for(mat2 m=rotate2D(5.);j<16.;j++){
+      p*=m;
+      n*=m;
+      q=(p)*S+t*4.+sin(t*4.-d*6.)*.8+j+n ;
+      a+=dot(cos(q)/S,vec2(.2));
+      n-=sin(q);
+      S*=1.2;
+    }
+    
+    return a;
+}
+
+void fragment() {
+	vec2 iResolution = 1.0/SCREEN_PIXEL_SIZE;
+    vec2 r = (FRAGCOORD.xy-.5*iResolution.xy);
+    float a = iResolution.y;
+    vec2 uv = r/a;
+	
+    // VARIABLES
+    vec3 sp = vec3(uv + .5, 0.);
+    vec3 ro = vec3(0., 0., -1.);
+    vec3 rd = normalize(ro-sp);
+
+    // NORMALS
+    vec2 x1 = (r-vec2(-1.,0.))/a;
+    vec2 y1 = (r-vec2(0.,-1.))/a;
+         
+    float nB = noisePulse(uv, TIME);
+
+    // SHADE
+    float occl = nB + .5;  
+    
+    // COMP
+    vec3 tint = vec3(0.3, 0.03, 0.005);
+    vec3 comp = vec3(0);
+    comp += occl * occl * tint;
+    
+    // POST
+    uv -= vec2(1.);
+    comp *= pow(2.0*uv.x*uv.y*(uv.x-1.)*(uv.y-1.),0.4);
+    comp = sqrt(comp);    
+    //COLOR=vec4(0.0);
+    COLOR=vec4(comp,1.);
+    
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q3w6"]
-shader = ExtResource("9_bhayg")
+shader = SubResource("Shader_dnurj")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kpfpj"]
+[sub_resource type="ImageTexture" id="ImageTexture_cdl2q"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j46xf"]
-noise = SubResource("FastNoiseLite_kpfpj")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf11o"]
-shader = ExtResource("9_bhayg")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yovy"]
+shader = ExtResource("8_w45lp")
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -319,10 +376,10 @@ offset_bottom = 40.0
 material = SubResource("ShaderMaterial_5q3w6")
 position = Vector2(385.585, 204.293)
 scale = Vector2(0.0680271, 0.0652636)
-texture = SubResource("NoiseTexture2D_j46xf")
+texture = SubResource("ImageTexture_cdl2q")
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
-material = SubResource("ShaderMaterial_tf11o")
+material = SubResource("ShaderMaterial_5yovy")
 offset_left = 464.0
 offset_top = 238.0
 offset_right = 504.0
