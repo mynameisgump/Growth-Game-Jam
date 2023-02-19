@@ -13,11 +13,11 @@ void vertex(){
 void fragment() {
 	
 	vec2 r = 1.0/TEXTURE_PIXEL_SIZE;
-	vec2 n,q,p=(UV.xy-.5*r)/r.y;
+	vec2 n,q,p=(UV.xy)/r.x;
 	float d=dot(p,p);
-	float S=9.;
+	float S=5.;
 	float i,a,j;
-	vec4 o = vec4(0.0,0.0,0.0,1.0);
+	vec4 o = vec4(0.0,0.0,0.0,0.7);
 	for(mat2 m=rotate2D(5.);j<30.;j++){
 	  p*=m;
 	  n*=m;
@@ -26,6 +26,6 @@ void fragment() {
 	  n-=sin(q);
 	  S*=1.2;
 	}
-	//o += (a+.2)*vec4(4,2,1,0)+a+a-d;
+	o += (a+.2)*vec4(1,1,1,0)+a+a-d;
 	COLOR=o;
 }
