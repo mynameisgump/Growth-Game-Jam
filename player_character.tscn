@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cyqkh0m7cgmah"]
+[gd_scene load_steps=19 format=3 uid="uid://cyqkh0m7cgmah"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://Hand.gd" id="2_g10aa"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c40bpe5elvw25" path="res://assets/crosshairpack_kenney/PNG/White/crosshair001.png" id="5_xv4ws"]
 [ext_resource type="Texture2D" uid="uid://b22jv3p1s6la2" path="res://assets/crosshairpack_kenney/PNG/Outline Retina/crosshair063.png" id="6_pqfsi"]
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/DivineLight.woff" id="7_3dtsa"]
-[ext_resource type="Shader" path="res://wibbly_canvas.gdshader" id="8_8h5bp"]
-[ext_resource type="Texture2D" uid="uid://dlwew2pj0u0b" path="res://assets/textures/bluebrick.png" id="9_2tlqy"]
+[ext_resource type="Shader" path="res://attempt3gonnacry.gdshader" id="9_bhayg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
@@ -126,8 +125,16 @@ _data = {
 "RevolverFire2": SubResource("Animation_w0d15")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5httc"]
-shader = ExtResource("8_8h5bp")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q3w6"]
+shader = ExtResource("9_bhayg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kpfpj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j46xf"]
+noise = SubResource("FastNoiseLite_kpfpj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf11o"]
+shader = ExtResource("9_bhayg")
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -309,7 +316,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="HUD"]
-material = SubResource("ShaderMaterial_5httc")
-position = Vector2(422.5, 195)
-scale = Vector2(9.83594, 5.75)
-texture = ExtResource("9_2tlqy")
+material = SubResource("ShaderMaterial_5q3w6")
+position = Vector2(385.585, 204.293)
+scale = Vector2(0.0680271, 0.0652636)
+texture = SubResource("NoiseTexture2D_j46xf")
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+material = SubResource("ShaderMaterial_tf11o")
+offset_left = 464.0
+offset_top = 238.0
+offset_right = 504.0
+offset_bottom = 278.0
