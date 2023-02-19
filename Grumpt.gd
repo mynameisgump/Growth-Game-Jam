@@ -19,12 +19,12 @@ extends CharacterBody3D
 @onready var leftLegGibs : Node3D = $LeftLegGibs
 @onready var rightLegGibs : Node3D = $RightLegGibs
 
-@onready var vision : Area3D = $Vision
-
 @export var movement_speed : float = 4.0
 @onready var nav_agent : NavigationAgent3D = get_node("NavigationAgent3D")
 
-@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var animation_player : AnimationPlayer = $AnimationPlayer;
+
+@onready var hurt_box : CollisionShape3D = $HurtBox;
 
 var movement_delta : float
 var SPEED = 3.0;
@@ -101,6 +101,7 @@ func disable_left():
 	left_hit.disabled = true;
 	left_leg.visible = false;
 	left_blood_spray.emitting = true;
+	left_burn.transform = left_leg.transform;
 	left_burning = true;
 	left_burn.visible = true;
 	var gibs = leftLegGibs.get_children()
@@ -110,6 +111,7 @@ func disable_right():
 	right_hit.disabled = true;
 	right_leg.visible = false;
 	right_blood_spray.emitting = true;
+	right_burn.transform = right_leg.transform;
 	right_burning = true;
 	right_burn.visible = true;
 	var gibs = rightLegGibs.get_children()
@@ -129,6 +131,10 @@ func damage(hit) -> void:
 		left_leg.visible = false;
 		body_hit.disabled = true;
 		body.visible = false;
+		
+		left_burn.transform = left_leg.transform;
+		right_burn.transform = right_leg.transform;
+		
 		right_blood_spray.emitting = false;
 		left_blood_spray.emitting = false;
 		torso_blood_spray.emitting = true;
@@ -139,6 +145,8 @@ func damage(hit) -> void:
 		left_burn.visible = true;
 		torso_burning = true;
 		torso_burn.visible = true;
+		hurt_box.disabled = false;
+		hurt_box.visible = false;
 		
 		var left_gibs = leftLegGibs.get_children()
 		set_gibs(left_gibs)

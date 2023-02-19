@@ -274,7 +274,7 @@ size = Vector3(1.5, 2, 1.5)
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11785, 0)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_jxrsg")
 
 [node name="TorsoMesh" type="MeshInstance3D" parent="."]
@@ -412,6 +412,7 @@ draw_pass_1 = ExtResource("3_hbkj0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
+speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_35nqj")
 }
