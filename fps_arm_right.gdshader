@@ -6,10 +6,16 @@ mat2 rotate2D(float r){
     return mat2(vec2(cos(r), sin(r)),vec2( -sin(r), cos(r)));
 }
 
+varying vec2 vUv;
+void vertex() {
+	vUv = UV;
+	VERTEX = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4( VERTEX, 1.0 );
+}
+
 void fragment() {
 	vec2 r = 1.0/VIEWPORT_SIZE;
 	vec2 uv = UV.xy / r.xy;
-	vec2 n,N,q,p=(UV.xy*2.-1.0/VIEWPORT_SIZE)/(1.0/VIEWPORT_SIZE.y);
+	vec2 n,N,q,p=(uv.xy*2.-1.0/VIEWPORT_SIZE)/(1.0/VIEWPORT_SIZE.y);
 	float S=5.,a,j;
 	for(mat2 m=rotate2D(5.);j++<30.;S*=1.2){
 		p*=m;
@@ -20,9 +26,9 @@ void fragment() {
 		q=sin(q);
 		N+=q/(S+60.);
 	}
-	ALBEDO+=.1-a*.1;ALBEDO.r*=5.;
-	ALBEDO+=min(.7,.001/length(N));
-	ALBEDO-=ALBEDO*dot(p,p)*.7;
+	//ALBEDO+=.1-a*.1;ALBEDO.r*=5.;
+	//ALBEDO+=min(.7,.001/length(N));
+	//ALBEDO-=ALBEDO*dot(p,p)*.7;
 	ALBEDO+=texture(u_texture, uv).rgb;
 
 }

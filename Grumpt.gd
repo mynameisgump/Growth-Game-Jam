@@ -19,25 +19,24 @@ extends CharacterBody3D
 @onready var leftLegGibs : Node3D = $LeftLegGibs
 @onready var rightLegGibs : Node3D = $RightLegGibs
 
-@export var movement_speed : float = 4.0
 @onready var nav_agent : NavigationAgent3D = get_node("NavigationAgent3D")
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer;
 
 @onready var hurt_box : CollisionShape3D = $HurtBox;
 
+@export var movement_speed : float = 4.0
+
 var movement_delta : float
 var SPEED = 3.0;
 var dead = false;
 
-# .get_material().set_shader_param("uniform_name", Color(1,1,1))
 var right_burning = false;
 var cur_right_burn = 0;
 var left_burning = false;
 var cur_left_burn = 0;
 var torso_burning = false;
 var cur_torso_burn = 0;
-
 
 func update_target_location(target):
 	nav_agent.target_position = target;
@@ -91,10 +90,11 @@ func _physics_process(delta):
 		burn_torso()
 		
 func set_gibs(gibs):
-	for gib in gibs:
-		gib.top_level = true
-		gib.freeze = false;
-		gib.visible = true;
+	pass
+#	for gib in gibs:
+#		gib.top_level = true
+#		gib.freeze = false;
+#		gib.visible = true;
 
 
 func disable_left():
@@ -145,7 +145,7 @@ func damage(hit) -> void:
 		left_burn.visible = true;
 		torso_burning = true;
 		torso_burn.visible = true;
-		hurt_box.disabled = false;
+		hurt_box.disabled = true;
 		hurt_box.visible = false;
 		
 		var left_gibs = leftLegGibs.get_children()

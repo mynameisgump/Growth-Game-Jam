@@ -1,9 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://de3gu2y5pw85u"]
+[gd_scene load_steps=23 format=3 uid="uid://de3gu2y5pw85u"]
 
 [ext_resource type="Texture2D" uid="uid://c3ck5jcc78xrm" path="res://assets/textures/Frens/albedo.png" id="1_wpsh7"]
 [ext_resource type="Texture2D" uid="uid://b0qj1j23yjiho" path="res://assets/textures/Frens/displacement.png" id="2_0v805"]
 [ext_resource type="Texture2D" uid="uid://clkfo1nlu6ugo" path="res://assets/textures/Frens/normals.png" id="3_2wqib"]
 [ext_resource type="Texture2D" uid="uid://j48fwqt1w7qy" path="res://assets/textures/Frens/roughness.png" id="4_r6t2u"]
+[ext_resource type="Texture2D" uid="uid://1a0xrhrit44p" path="res://assets/textures/Faces/albedo.png" id="5_kkod5"]
+[ext_resource type="Texture2D" uid="uid://cy5hcvn07exky" path="res://assets/textures/Faces/displacement.png" id="6_0ktlq"]
+[ext_resource type="Texture2D" uid="uid://caqgsrs1cqps8" path="res://assets/textures/Faces/normals.png" id="7_ysqpj"]
+[ext_resource type="Texture2D" uid="uid://c23wofgbpi2j7" path="res://assets/textures/Faces/roughness.png" id="8_ylasw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2ftm"]
 resource_name = "Material.001"
@@ -103,6 +107,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2u62b")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0o1eh"]
+albedo_texture = ExtResource("5_kkod5")
+roughness_texture = ExtResource("8_ylasw")
+normal_enabled = true
+normal_texture = ExtResource("7_ysqpj")
+heightmap_enabled = true
+heightmap_texture = ExtResource("6_0ktlq")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbdtk"]
 resource_name = "Material.003"
 cull_mode = 2
@@ -190,6 +202,7 @@ transform = Transform3D(0, 0.208306, 0, 0, 0, 0.208306, 0.208306, 0, 0, -0.81143
 transform = Transform3D(0.43747, 0, 0, 0, 0.28738, 0, 0, 0, 0.43747, -3.61028, 0, -1.65808)
 mesh = SubResource("ArrayMesh_nd2tv")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_0o1eh")
 
 [node name="Main" type="MeshInstance3D" parent="Gunny"]
 transform = Transform3D(0.04077, 0, -0.00215, 0, 0.0822, 0, 0.00215, 0, 0.04077, -2.57967, 2.38419e-07, 0.39476)

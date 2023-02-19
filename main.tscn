@@ -60,6 +60,7 @@ script = ExtResource("1_naapg")
 environment = SubResource("Environment_qr5bp")
 
 [node name="Hud" type="Node2D" parent="."]
+visible = false
 
 [node name="Crosshair001" type="Sprite2D" parent="Hud"]
 visible = false

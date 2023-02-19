@@ -182,6 +182,45 @@ turbulence_noise_strength = 7.07
 turbulence_noise_scale = 0.57
 turbulence_noise_speed_random = 5.05
 
+[sub_resource type="Animation" id="Animation_331l1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightLegMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.40813, 1.2559, 0.0444609)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightLegMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, -3.14038, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftLegMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0021161, -3.13984, 0.00120733)]
+}
+
 [sub_resource type="Animation" id="Animation_r3fmt"]
 resource_name = "Running"
 length = 4.0
@@ -223,45 +262,6 @@ tracks/2/keys = {
 "values": [Vector3(-0.0021161, -3.13984, 0.00120733), Vector3(-1.5708, -3.14038, 0), Vector3(8.74227e-08, 5.29379e-11, -3.14038), Vector3(1.5708, 3.14038, 0), Vector3(-2.97052e-14, 3.14159, 0.00121108)]
 }
 
-[sub_resource type="Animation" id="Animation_331l1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RightLegMesh:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.40813, 1.2559, 0.0444609)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RightLegMesh:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.5708, -3.14038, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LeftLegMesh:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.0021161, -3.13984, 0.00120733)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35nqj"]
 _data = {
 "RESET": SubResource("Animation_331l1"),
@@ -293,7 +293,7 @@ transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 0, 1.235
 shape = SubResource("BoxShape3D_4g1d5")
 
 [node name="LeftLegMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.299999, 0.00036331, -0.000525757, 0.000362197, 0.3, 0.000634831, 0.000526524, 0.000634196, -0.299999, -0.414126, 1.25293, 0.0375106)
+transform = Transform3D(-0.299999, 0.000363312, -0.000525829, 0.000362198, 0.3, 0.00063483, 0.000526595, 0.000634195, -0.299999, -0.414126, 1.25293, 0.0375106)
 layers = 17
 mesh = SubResource("ArrayMesh_hecdd")
 skeleton = NodePath("")
@@ -308,7 +308,7 @@ transform = Transform3D(-3.33333, -1.27602e-09, -5.03846e-07, 2.5484e-09, 3.3333
 shape = SubResource("CylinderShape3D_5y2wl")
 
 [node name="RightLegMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.3, 0.000363324, 1.58814e-11, 0, -1.31134e-08, 0.3, 0.000363324, 0.3, 1.31134e-08, 0.40813, 1.2559, 0.0444609)
+transform = Transform3D(-0.3, 0.000363825, 1.31704e-09, 0, -1.086e-06, 0.3, 0.000363825, 0.3, 1.086e-06, 0.40813, 1.2559, 0.0444609)
 mesh = SubResource("ArrayMesh_nrihj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_jr32u")

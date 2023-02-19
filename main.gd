@@ -17,7 +17,6 @@ func _physics_process(delta):
 	
 	if spawn_timer.is_stopped():
 		var rand_spawn = spawns_arr[randi() % spawns_arr.size()]
-		print("Spawn")
 		spawn_timer.start();
 		var new_grumpt = Enemy.instantiate()
 		add_child(new_grumpt)

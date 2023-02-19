@@ -1,9 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyqkh0m7cgmah"]
+[gd_scene load_steps=17 format=3 uid="uid://cyqkh0m7cgmah"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://Hand.gd" id="2_g10aa"]
 [ext_resource type="Script" path="res://Head.gd" id="2_lvxga"]
 [ext_resource type="PackedScene" uid="uid://de3gu2y5pw85u" path="res://fps_arm_right.tscn" id="5_agcum"]
+[ext_resource type="Texture2D" uid="uid://c40bpe5elvw25" path="res://assets/crosshairpack_kenney/PNG/White/crosshair001.png" id="5_xv4ws"]
+[ext_resource type="Texture2D" uid="uid://b22jv3p1s6la2" path="res://assets/crosshairpack_kenney/PNG/Outline Retina/crosshair063.png" id="6_pqfsi"]
+[ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/DivineLight.woff" id="7_3dtsa"]
+[ext_resource type="Shader" path="res://wibbly_canvas.gdshader" id="8_8h5bp"]
+[ext_resource type="Texture2D" uid="uid://dlwew2pj0u0b" path="res://assets/textures/bluebrick.png" id="9_2tlqy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
@@ -14,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Head/Hand/Gun_1:position")
+tracks/0/path = NodePath("Body/Head/Guns/Gun1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Head/Hand/Gun_1:rotation")
+tracks/1/path = NodePath("Body/Head/Guns/Gun1:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,13 +40,37 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 3.14159, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Head/Guns/Gun2_13:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.205, -0.224, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Head/Guns/Gun2_13:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_8aspr"]
-resource_name = "RevolverFire"
+resource_name = "RevolverFire1"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Head/Hand/Gun_1:position")
+tracks/0/path = NodePath("Body/Head/Guns/Gun1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +82,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Head/Hand/Gun_1:rotation")
+tracks/1/path = NodePath("Body/Head/Guns/Gun1:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,11 +92,42 @@ tracks/1/keys = {
 "values": [Vector3(0, 3.14159, 0), Vector3(-0.811578, 3.14159, 0), Vector3(0, 3.14159, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_w0d15"]
+resource_name = "RevolverFire2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head/Guns/Gun2_13:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.205, -0.224, 0), Vector3(-0.205, -0.224, 0.5), Vector3(-0.205, -0.224, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Head/Guns/Gun2_13:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(-0.811578, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jebfa"]
 _data = {
 "RESET": SubResource("Animation_fpluh"),
-"RevolverFire": SubResource("Animation_8aspr")
+"RevolverFire1": SubResource("Animation_8aspr"),
+"RevolverFire2": SubResource("Animation_w0d15")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5httc"]
+shader = ExtResource("8_8h5bp")
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -97,104 +157,116 @@ target_position = Vector3(0, 0, -1000)
 collision_mask = 16
 collide_with_areas = true
 
-[node name="Hand" type="Node3D" parent="Body/Head"]
+[node name="Guns" type="Node3D" parent="Body/Head"]
 script = ExtResource("2_g10aa")
 
-[node name="Gun_1" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun1" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, 0.0277904, -0.223666, 0)
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_1"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun1"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_2" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
-transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.205, -0.224, 0)
-
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_2"]
-wait_time = 2.0
-one_shot = true
-
-[node name="Gun_3" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
-transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.315, -0.238, 0)
-
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_3"]
-wait_time = 2.0
-one_shot = true
-
-[node name="Gun_4" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
-transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.082, -0.224, 0)
-
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_4"]
-wait_time = 2.0
-one_shot = true
-
-[node name="Gun_5" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun2" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, 0.158, -0.224, 0)
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_5"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun2"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_6" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun2_13" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
+transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.205, -0.224, 0.5)
+visible = false
+
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun2_13"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Gun3" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
+transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.315, -0.238, 0)
+visible = false
+
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun3"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Gun4" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
+transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.082, -0.224, 0)
+visible = false
+
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun4"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Gun6" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(-0.0206283, 0.0955827, -0.0209386, 0.0978488, 0.0200855, -0.00471065, -0.000296947, -0.0214599, -0.0976698, -0.221, 0.043, 0.131)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_6"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun6"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_7" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun7" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.0480281, 0.0849179, -0.0219602, 0.0864191, -0.0500954, -0.00471065, -0.0150012, -0.0167154, -0.0974452, -0.101, 0.197, 0.131)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_7"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun7"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_8" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun8" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(-0.0915438, -0.0213033, 0.0341453, -0.0205862, 0.0976886, 0.0057564, -0.0345824, -0.0017596, -0.0938134, 0.21, -0.203, -0.085)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_8"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun8"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_9" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun9" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(-0.0197657, -0.0931181, 0.0306323, -0.09691, 0.023266, 0.00819385, -0.0147569, -0.0280662, -0.0948395, 0.328, -0.111, -0.036)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_9"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun9"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_10" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun10" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.045044, -0.0826518, 0.0337599, -0.0888799, -0.0450913, 0.00819385, 0.00845042, -0.0336966, -0.0937717, 0.271, 0.029, 0.028)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_10"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun10"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_11" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun11" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.0953506, -0.000351276, 0.0301353, -0.00295665, -0.0996199, 0.00819385, 0.029992, -0.00870388, -0.0949985, 0.143, 0.219, -0.036)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_11"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun11"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_12" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun12" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.0982379, -0.0044095, -0.0181623, -0.00295665, -0.0996199, 0.00819385, -0.0184545, -0.00751247, -0.0979949, 0.038, 0.225, -0.036)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_12"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun12"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_13" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun13" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.0990408, -0.00181277, 0.0136982, -0.00295665, -0.0996199, 0.00819385, 0.0134976, -0.00852026, -0.0987179, 0.108, 0.225, -0.036)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_13"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun13"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Gun_14" parent="Body/Head/Hand" instance=ExtResource("5_agcum")]
+[node name="Gun14" parent="Body/Head/Guns" instance=ExtResource("5_agcum")]
 transform = Transform3D(0.0999399, -0.00309491, -0.00156544, -0.00295665, -0.0996199, 0.00819385, -0.00181308, -0.00814264, -0.0996515, 0.074, 0.225, -0.036)
+visible = false
 
-[node name="Gun1Timer" type="Timer" parent="Body/Head/Hand/Gun_14"]
+[node name="GunTimer" type="Timer" parent="Body/Head/Guns/Gun14"]
 wait_time = 2.0
 one_shot = true
 
@@ -203,4 +275,41 @@ libraries = {
 "": SubResource("AnimationLibrary_jebfa")
 }
 
-[node name="NavigationAgent" type="Node" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Hud" type="Node2D" parent="HUD"]
+
+[node name="Crosshair001" type="Sprite2D" parent="HUD/Hud"]
+visible = false
+position = Vector2(578, 328)
+texture = ExtResource("5_xv4ws")
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/Hud"]
+position = Vector2(578, 328)
+scale = Vector2(-0.25, -0.25)
+texture = ExtResource("6_pqfsi")
+
+[node name="Health" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_right = 44.0
+offset_bottom = 26.0
+grow_horizontal = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("7_3dtsa")
+text = "Health: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="HUD"]
+material = SubResource("ShaderMaterial_5httc")
+position = Vector2(422.5, 195)
+scale = Vector2(9.83594, 5.75)
+texture = ExtResource("9_2tlqy")
