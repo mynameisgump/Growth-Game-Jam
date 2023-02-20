@@ -1,7 +1,7 @@
-[gd_resource type="SphereMesh" load_steps=4 format=3]
+[gd_resource type="SphereMesh" load_steps=4 format=3 uid="uid://cxcym3c8m6jin"]
 
-[ext_resource type="Texture2D" uid="uid://ccy5bynt23gms" path="res://assets/textures/others_0001_2k_eG7C2b(1)/others_0001_color_2k.jpg" id="1_4iugr"]
-[ext_resource type="Texture2D" uid="uid://blbfeybtljop0" path="res://assets/textures/others_0001_2k_eG7C2b(1)/others_0001_normal_directx_2k.png" id="2_eam1t"]
+[ext_resource type="Texture2D" uid="uid://ccy5bynt23gms" path="res://assets/textures/Flesh/others_0001_color_2k.jpg" id="1_4iugr"]
+[ext_resource type="Texture2D" uid="uid://blbfeybtljop0" path="res://assets/textures/Flesh/others_0001_normal_directx_2k.png" id="2_eam1t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlegv"]
 albedo_texture = ExtResource("1_4iugr")

@@ -71,7 +71,9 @@ func fire():
 			if gun_raycast.is_colliding():
 				var target = gun_raycast.get_collider();
 				if target.is_in_group("Limbs"):
+					print("Target:", target.name)
 					var part_hit = target.get_node("../../").name
+					print("Part Hit:", part_hit)
 					target.get_node("../../../../").damage(part_hit)
 
 func handle_input(delta : float) -> void:

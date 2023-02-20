@@ -171,4 +171,3 @@ editor_description = "Song from Emerald Chiptune:
 https://www.youtube.com/watch?v=Iiy17z4hmCE"
 stream = ExtResource("7_7py1c")
 volume_db = -4.0
-autoplay = true
