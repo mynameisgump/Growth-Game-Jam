@@ -330,6 +330,9 @@ script = ExtResource("1_uche2")
 [node name="Leg1" parent="Legs" instance=ExtResource("8_r6x7g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20785, 2.06493, 0)
 
+[node name="Leg2" parent="Legs" instance=ExtResource("8_r6x7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28157, 1.96523, 0)
+
 [node name="TorsoMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.3, 0, 4.52987e-08, 0, 0.3, 0, -4.52987e-08, 0, -0.3, 0, 1.25896, 0.0220148)
 mesh = SubResource("ArrayMesh_ujn87")

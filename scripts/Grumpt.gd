@@ -159,7 +159,8 @@ func damage(hit) -> void:
 		dead = true;
 	else:
 		print("Test: ",hit)
-		legs.get_node("Leg1").disable_leg();
+		var test = "Leg1";
+		legs.get_node(NodePath(hit)).disable_leg();
 
 
 
