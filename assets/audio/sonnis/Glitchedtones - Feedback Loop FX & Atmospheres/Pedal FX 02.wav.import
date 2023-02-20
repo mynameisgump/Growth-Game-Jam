@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvgfpwoa23esm"
+path="res://.godot/imported/Pedal FX 02.wav-266f87ace8171229a42e6b87ea4e348c.sample"
+
+[deps]
+
+source_file="res://assets/audio/sonnis/Glitchedtones - Feedback Loop FX & Atmospheres/Pedal FX 02.wav"
+dest_files=["res://.godot/imported/Pedal FX 02.wav-266f87ace8171229a42e6b87ea4e348c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

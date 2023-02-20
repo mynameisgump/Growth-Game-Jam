@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@onready var legs : Node3D = $Legs
+
 @onready var left_leg : MeshInstance3D = $LeftLegMesh
 @onready var right_leg : MeshInstance3D = $RightLegMesh
 @onready var body : MeshInstance3D = $TorsoMesh
@@ -155,6 +157,9 @@ func damage(hit) -> void:
 		set_gibs(right_gibs)
 		
 		dead = true;
+	else:
+		print("Test: ",hit)
+		legs.get_node("Leg1").disable_leg();
 
 
 

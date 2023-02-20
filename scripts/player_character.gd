@@ -70,9 +70,13 @@ func fire():
 			gunshot.play();
 			if gun_raycast.is_colliding():
 				var target = gun_raycast.get_collider();
+				print(target)
 				if target.is_in_group("Limbs"):
-					var part_hit = target.get_child(gun_raycast.get_collider_shape()).name;
-					target.get_parent().get_parent().damage(part_hit);
+					#var part_hit = target.get_child(gun_raycast.get_collider_shape()).name;
+					var part_hit = target.get_node("../../").name
+					print("PartHit: ",part_hit)
+					target.get_node("../../../../").damage(part_hit)
+					#print(target.get_node("../../../../").get_parent().damage(part_hit));
 
 func handle_input(delta : float) -> void:
 	

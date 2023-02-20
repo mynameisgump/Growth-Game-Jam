@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://irxnntyk0nlb"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/Grumpt_Burn.gdshader" id="1_fobrh"]
 

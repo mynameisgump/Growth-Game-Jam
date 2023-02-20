@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://df4oybopuhqbe" path="res://scenes/Grumpt.tscn" id="2_10pl5"]
 [ext_resource type="Texture2D" uid="uid://7rd08hldshxl" path="res://assets/GreySkybox.png" id="2_n8vgv"]
 [ext_resource type="Material" uid="uid://c8fbstovowvsw" path="res://assets/materials/Plane_Basic_Mat.tres" id="3_nwwu7"]
-[ext_resource type="PackedScene" uid="uid://bhf2lcb7ex0gk" path="res://scenes/player_character.tscn" id="4_3odhb"]
+[ext_resource type="PackedScene" uid="uid://djfqq3hsgk8w4" path="res://scenes/player_character.tscn" id="4_3odhb"]
 [ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="5_g42tk"]
 [ext_resource type="AudioStream" uid="uid://cpujftt3x1nkw" path="res://assets/audio/ultimatum.mp3" id="7_7py1c"]
 
@@ -78,7 +78,7 @@ position = Vector2(578, 328)
 position = Vector2(578, 328)
 scale = Vector2(-0.25, -0.25)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_10pl5")]
+[node name="Grumpt" parent="." instance=ExtResource("2_10pl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686233, -11.2578)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -166,7 +166,9 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Floor4/StaticBody3D"]
 shape = SubResource("BoxShape3D_ikqme")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Ultimatum" type="AudioStreamPlayer" parent="."]
+editor_description = "Song from Emerald Chiptune:
+https://www.youtube.com/watch?v=Iiy17z4hmCE"
 stream = ExtResource("7_7py1c")
 volume_db = -4.0
 autoplay = true
