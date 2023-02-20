@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwdw3me8k5un3"]
-
-[ext_resource type="PackedScene" uid="uid://dwikfsapvsnt" path="res://assets/Grumt.glb" id="1_82o4y"]
-
-[node name="Grumt" instance=ExtResource("1_82o4y")]

@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwpsxgop4kp1k"]
+[gd_scene load_steps=6 format=3 uid="uid://yyt4o2o6o6e7"]
 
-[ext_resource type="Texture2D" uid="uid://ctdeymyq3rvg8" path="res://assets/Leg_gibs.png" id="1_lp8ex"]
+[ext_resource type="Texture2D" uid="uid://ctdeymyq3rvg8" path="res://assets/textures/Leg_gibs.png" id="1_51sww"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_baxxr"]
 resource_name = "Material02"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_lp8ex")
+albedo_texture = ExtResource("1_51sww")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6taav"]
 _surfaces = [{

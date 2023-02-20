@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3]
+
+[ext_resource type="Shader" path="res://scripts/shaders/Grumpt_Burn.gdshader" id="1_fobrh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ojlg8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vmco3"]
+width = 1280
+height = 1280
+noise = SubResource("FastNoiseLite_ojlg8")
+
+[sub_resource type="ImageTexture" id="ImageTexture_px2y1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fobrh")
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_amount = 0.0
+shader_parameter/burn_size = 0.0
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")
