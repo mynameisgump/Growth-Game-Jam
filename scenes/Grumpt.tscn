@@ -1,105 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://df4oybopuhqbe"]
+[gd_scene load_steps=10 format=3 uid="uid://df4oybopuhqbe"]
 
 [ext_resource type="Script" path="res://scripts/Grumpt.gd" id="1_uche2"]
 [ext_resource type="PackedScene" uid="uid://bde5i0sx0imq8" path="res://scenes/torso.tscn" id="2_bsvni"]
-[ext_resource type="SphereMesh" uid="uid://cxcym3c8m6jin" path="res://scenes/blud.tres" id="4_6yobg"]
 [ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="7_e0625"]
 [ext_resource type="PackedScene" uid="uid://jw1wfti0fcrq" path="res://scenes/leg.tscn" id="8_r6x7g"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5qp7"]
-resource_name = "Material.001"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
-roughness = 0.43079
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_xh5o5"]
-_surfaces = [{
-"aabb": AABB(-1.38872, -1.1, -1.42426, 2.77744, 2.2, 2.84852),
-"format": 4097,
-"index_count": 60,
-"index_data": PackedByteArray(2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0, 7, 0, 1, 0, 3, 0, 7, 0, 5, 0, 1, 0, 2, 0, 11, 0, 10, 0, 2, 0, 3, 0, 11, 0, 10, 0, 9, 0, 8, 0, 10, 0, 11, 0, 9, 0, 8, 0, 1, 0, 0, 0, 8, 0, 9, 0, 1, 0, 2, 0, 8, 0, 0, 0, 2, 0, 10, 0, 8, 0, 11, 0, 1, 0, 9, 0, 11, 0, 3, 0, 1, 0),
-"name": "Material.001",
-"primitive": 3,
-"vertex_count": 12,
-"vertex_data": PackedByteArray(171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 63, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 63, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 191, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 191, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 63, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 63, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 191, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 191, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 63, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 63, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 191, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 191)
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_ujn87"]
-resource_name = "Grumpt_Main_Cube003"
-_surfaces = [{
-"aabb": AABB(-1.38872, -1.1, -1.42426, 2.77744, 2.2, 2.84852),
-"attribute_data": PackedByteArray(188, 101, 155, 62, 188, 38, 234, 62, 148, 35, 19, 63, 0, 0, 128, 63, 188, 101, 155, 62, 188, 38, 234, 62, 0, 0, 0, 0, 188, 38, 234, 62, 112, 47, 68, 62, 0, 0, 128, 63, 0, 0, 0, 0, 188, 38, 234, 62, 188, 101, 27, 63, 188, 38, 234, 62, 148, 35, 19, 63, 190, 101, 27, 63, 188, 101, 27, 63, 188, 38, 234, 62, 188, 101, 155, 62, 188, 38, 234, 62, 112, 47, 68, 62, 190, 101, 27, 63, 188, 101, 155, 62, 188, 38, 234, 62, 112, 47, 196, 62, 70, 115, 108, 63, 188, 101, 155, 62, 168, 141, 128, 62, 190, 101, 27, 63, 192, 101, 155, 62, 112, 47, 196, 62, 70, 115, 108, 63, 0, 0, 0, 0, 168, 141, 128, 62, 189, 101, 27, 63, 0, 0, 0, 52, 112, 47, 196, 62, 120, 242, 46, 63, 188, 101, 27, 63, 190, 101, 27, 63, 140, 230, 88, 63, 192, 101, 155, 62, 112, 47, 196, 62, 120, 242, 46, 63, 188, 101, 155, 62, 190, 101, 27, 63, 140, 230, 88, 63, 0, 0, 128, 51, 140, 230, 88, 63, 190, 101, 27, 63, 188, 101, 155, 62, 190, 101, 27, 63, 112, 47, 68, 63, 70, 115, 108, 63, 140, 230, 88, 63, 190, 101, 155, 62, 0, 0, 0, 0, 190, 101, 27, 63, 0, 0, 0, 0, 70, 115, 108, 63, 190, 101, 27, 63, 190, 101, 27, 63, 188, 101, 27, 63, 168, 141, 128, 62, 112, 47, 68, 63, 120, 242, 46, 63, 189, 101, 27, 63, 192, 101, 155, 62, 188, 101, 155, 62, 168, 141, 128, 62, 0, 0, 0, 0, 120, 242, 46, 63),
-"format": 4119,
-"index_count": 60,
-"index_data": PackedByteArray(8, 0, 22, 0, 11, 0, 8, 0, 19, 0, 22, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 5, 0, 16, 0, 13, 0, 2, 0, 5, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 21, 0, 4, 0, 10, 0, 21, 0, 15, 0, 4, 0, 6, 0, 34, 0, 31, 0, 6, 0, 9, 0, 34, 0, 30, 0, 27, 0, 24, 0, 30, 0, 33, 0, 27, 0, 25, 0, 3, 0, 0, 0, 25, 0, 28, 0, 3, 0, 7, 0, 26, 0, 1, 0, 7, 0, 32, 0, 26, 0, 35, 0, 4, 0, 29, 0, 35, 0, 10, 0, 4, 0),
-"material": SubResource("StandardMaterial3D_p5qp7"),
-"name": "Material.001",
-"primitive": 3,
-"vertex_count": 36,
-"vertex_data": PackedByteArray(171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 63, 132, 91, 255, 127, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 63, 255, 127, 0, 0, 0, 0, 255, 191, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 63, 122, 164, 255, 127, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 63, 132, 91, 255, 127, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 63, 255, 127, 255, 255, 255, 255, 255, 191, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 63, 122, 164, 255, 127, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 191, 0, 0, 132, 219, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 191, 255, 127, 0, 0, 0, 0, 255, 191, 171, 170, 170, 50, 205, 204, 140, 191, 4, 78, 182, 191, 255, 255, 132, 219, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 191, 0, 0, 132, 219, 255, 127, 0, 128, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 191, 255, 127, 255, 255, 255, 255, 255, 191, 171, 170, 170, 50, 205, 204, 140, 63, 4, 78, 182, 191, 255, 255, 132, 219, 255, 127, 0, 128, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 63, 255, 127, 0, 0, 0, 0, 255, 191, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 63, 122, 164, 255, 127, 255, 127, 0, 128, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 63, 255, 255, 255, 127, 255, 255, 255, 255, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 63, 255, 127, 255, 255, 255, 255, 255, 191, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 63, 122, 164, 255, 127, 255, 127, 0, 128, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 63, 255, 255, 255, 127, 254, 255, 0, 128, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 191, 255, 127, 0, 0, 0, 0, 255, 191, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 191, 255, 255, 132, 219, 255, 127, 0, 128, 166, 193, 177, 63, 205, 204, 140, 191, 55, 231, 94, 191, 255, 255, 255, 127, 254, 255, 0, 128, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 191, 255, 127, 255, 255, 255, 255, 255, 191, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 191, 255, 255, 132, 219, 255, 127, 0, 128, 166, 193, 177, 63, 205, 204, 140, 63, 55, 231, 94, 191, 255, 255, 255, 127, 254, 255, 0, 128, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 63, 0, 0, 255, 127, 255, 127, 255, 191, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 63, 132, 91, 255, 127, 255, 127, 0, 128, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 63, 255, 127, 0, 0, 0, 0, 255, 191, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 63, 0, 0, 255, 127, 255, 127, 255, 191, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 63, 132, 91, 255, 127, 255, 127, 0, 128, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 63, 255, 127, 255, 255, 255, 255, 255, 191, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 191, 0, 0, 255, 127, 255, 127, 255, 191, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 191, 0, 0, 132, 219, 255, 127, 0, 128, 166, 193, 177, 191, 205, 204, 140, 191, 55, 231, 94, 191, 255, 127, 0, 0, 0, 0, 255, 191, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 191, 0, 0, 255, 127, 255, 127, 255, 191, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 191, 0, 0, 132, 219, 255, 127, 0, 128, 166, 193, 177, 191, 205, 204, 140, 63, 55, 231, 94, 191, 255, 127, 255, 255, 254, 255, 255, 191)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_xh5o5")
-
-[sub_resource type="Shader" id="Shader_elwl6"]
-code = "shader_type spatial;
-
-
-uniform sampler2D texture_albedo;
-
-uniform vec4 emission_color : source_color = vec4(1);
-uniform float emission_amount;
-
-uniform sampler2D dissolve_texture;
-uniform float burn_size : hint_range(0,2);
-uniform float dissolve_amount : hint_range(0,1);
-
-
-void fragment() {
-	vec4 albedo_tex = texture(texture_albedo,UV);
-	ALBEDO = albedo_tex.rgb;
-	
-	float sample = texture(dissolve_texture, UV).r;
-	float emission_value = 1.0 - smoothstep(dissolve_amount, dissolve_amount + burn_size, sample);
-	EMISSION = vec3(emission_value * emission_amount * emission_color.rgb);
-	ALPHA = smoothstep(dissolve_amount - burn_size, dissolve_amount, sample);
-}"
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ojlg8"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vmco3"]
-width = 1280
-height = 1280
-noise = SubResource("FastNoiseLite_ojlg8")
-
-[sub_resource type="ImageTexture" id="ImageTexture_px2y1"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0aa"]
-render_priority = 0
-shader = SubResource("Shader_elwl6")
-shader_parameter/emission_color = Color(1, 1, 1, 1)
-shader_parameter/emission_amount = 0.0
-shader_parameter/burn_size = 0.0
-shader_parameter/dissolve_amount = 0.0
-shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_igtho"]
-spread = 14.05
-flatness = 0.12
-gravity = Vector3(0, 10, 0)
-angular_velocity_min = -145.62
-angular_velocity_max = 145.62
-linear_accel_min = -56.18
-linear_accel_max = 22.47
-hue_variation_min = -1.0
-hue_variation_max = 1.0
-turbulence_enabled = true
-turbulence_noise_strength = 7.07
-turbulence_noise_scale = 0.57
-turbulence_noise_speed_random = 5.05
 
 [sub_resource type="Animation" id="Animation_331l1"]
 length = 0.001
@@ -137,31 +41,10 @@ script = ExtResource("1_uche2")
 [node name="Legs" type="Node3D" parent="."]
 
 [node name="Leg1" parent="Legs" instance=ExtResource("8_r6x7g")]
-transform = Transform3D(-1, 0, 0, 0, 1, -8.74228e-08, 0, 8.74228e-08, 1, 0.404394, 1.33819, 0)
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, -1, 0, 0.404394, 1.33819, 0)
 
 [node name="Leg2" parent="Legs" instance=ExtResource("8_r6x7g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.407967, 1.28745, 0)
-
-[node name="TorsoBurnt" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.3, 0, 4.52987e-08, 0, 0.3, 0, -4.52987e-08, 0, -0.3, 0, 1.25896, 0.0220148)
-visible = false
-mesh = SubResource("ArrayMesh_ujn87")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_hi0aa")
-
-[node name="TorsoBlood" type="GPUParticles3D" parent="."]
-transform = Transform3D(0.999957, -0.00930247, 0, 0.00930247, 0.999957, 0, 0, 0, 1, -0.0168436, 1.07249, -0.0952117)
-emitting = false
-amount = 1000
-lifetime = 5.0
-one_shot = true
-explosiveness = 1.0
-randomness = 0.1
-collision_base_size = 0.0
-visibility_aabb = AABB(-27.9924, -20.5757, -15.0765, 55.9848, 41.1515, 30.153)
-trail_lifetime = 2.78
-process_material = SubResource("ParticleProcessMaterial_igtho")
-draw_pass_1 = ExtResource("4_6yobg")
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.407967, 1.28745, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -184,3 +67,17 @@ material = SubResource("ShaderMaterial_emjur")
 offset_right = 1024.0
 offset_bottom = 1024.0
 color = Color(1, 0.137255, 0.0823529, 1)
+
+[node name="PositionHelpers" type="Node3D" parent="."]
+
+[node name="LegPosition1" type="Marker3D" parent="PositionHelpers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399318, 1.3426, 0)
+
+[node name="LegPosition2" type="Marker3D" parent="PositionHelpers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.414107, 1.28669, 0)
+
+[node name="LegPosition3" type="Marker3D" parent="PositionHelpers"]
+transform = Transform3D(0.943778, 0, -0.33058, 0, 1, 0, 0.33058, 0, 0.943778, -0.190238, 1.3239, 0.347864)
+
+[node name="LegPosition4" type="Marker3D" parent="PositionHelpers"]
+transform = Transform3D(0.905339, 0, 0.424689, 0, 1, 0, -0.424689, 0, 0.905339, 0.190238, 1.3239, 0.347864)

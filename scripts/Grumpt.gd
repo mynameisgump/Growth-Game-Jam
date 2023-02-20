@@ -22,7 +22,11 @@ func update_target_location(target):
 	
 func update_rotation(target):
 	self.look_at(target)
-		
+
+func _ready():
+	for leg in legs.get_children():
+		var leg_animations = leg.get_node("AnimationPlayer")
+		leg_animations.play("RunBaby1");
 func _physics_process(delta):
 
 	animation_player.play("Running")
@@ -35,17 +39,6 @@ func _physics_process(delta):
 		velocity = new_velocity
 		move_and_slide()
 		
-func set_gibs(gibs):
-	pass
-#	for gib in gibs:
-#		gib.top_level = true
-#		gib.freeze = false;
-#		gib.visible = true;
-
-
-
-
-	
 func damage(hit) -> void:
 	if "Torso" in hit:
 		dead = true;
@@ -54,8 +47,3 @@ func damage(hit) -> void:
 		print("Test: ",hit)
 		var test = "Leg1";
 		legs.get_node(NodePath(hit)).disable();
-
-
-
-
-

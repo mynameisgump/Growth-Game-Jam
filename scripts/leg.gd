@@ -11,7 +11,7 @@ var cur_burn = 0;
 
 func burn_leg():
 	if cur_burn<1:
-		cur_burn += 0.01;
+		cur_burn += 0.005;
 		leg_mesh.get_surface_override_material(0).set_shader_parameter("dissolve_amount", cur_burn)
 	else:
 		burning = false;
@@ -19,7 +19,6 @@ func burn_leg():
 		
 
 func disable():
-	print("In disable leg")
 	hitbox.disabled = true;
 	blood_spray.emitting = true;
 	leg_mesh.set_surface_override_material(0,burn_mat);
