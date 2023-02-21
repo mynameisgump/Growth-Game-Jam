@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://djfqq3hsgk8w4"]
+[gd_scene load_steps=15 format=3 uid="uid://djfqq3hsgk8w4"]
 
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://scripts/Head.gd" id="2_lvxga"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/Fonts/DivineLight.woff" id="6_xhatj"]
 [ext_resource type="AudioStream" uid="uid://22g44jgpkrs5" path="res://assets/audio/Jelly_Step_Smol.mp3" id="9_6uaaa"]
 [ext_resource type="AudioStream" uid="uid://df1ym7eva6o0a" path="res://assets/audio/Fire.mp3" id="9_nmi8n"]
-[ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="9_qkym3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
@@ -15,6 +14,18 @@
 
 [sub_resource type="Animation" id="Animation_fpluh"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_8aspr"]
 resource_name = "RevolverFire1"
@@ -22,24 +33,29 @@ resource_name = "RevolverFire1"
 [sub_resource type="Animation" id="Animation_w0d15"]
 resource_name = "RevolverFire2"
 
+[sub_resource type="Animation" id="Animation_f227j"]
+resource_name = "HitMarker"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0.0156863, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jebfa"]
 _data = {
+"HitMarker": SubResource("Animation_f227j"),
 "RESET": SubResource("Animation_fpluh"),
 "RevolverFire1": SubResource("Animation_8aspr"),
 "RevolverFire2": SubResource("Animation_w0d15")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yovy"]
-shader = ExtResource("9_qkym3")
-shader_parameter/brightness = 1.0
-shader_parameter/contrast = 1.0
-shader_parameter/saturation = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxgvg"]
-shader = ExtResource("9_qkym3")
-shader_parameter/brightness = 1.0
-shader_parameter/contrast = 6.902
-shader_parameter/saturation = 0.914
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -94,6 +110,7 @@ offset_right = -106.0
 offset_bottom = 364.0
 grow_horizontal = 2
 rotation = -0.697608
+scale = Vector2(0.865333, 0.547077)
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -103,42 +120,63 @@ text = "Health: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubViewport" type="SubViewport" parent="HUD"]
-size = Vector2i(1024, 1024)
-
-[node name="ColorRect" type="ColorRect" parent="HUD/SubViewport"]
-visible = false
-material = SubResource("ShaderMaterial_5yovy")
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(1, 0.137255, 0.0823529, 1)
-
-[node name="FleshPort" type="SubViewport" parent="HUD"]
-size = Vector2i(1024, 1024)
-
-[node name="ColorRect" type="ColorRect" parent="HUD/FleshPort"]
-visible = false
-material = SubResource("ShaderMaterial_dxgvg")
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(1, 0.137255, 0.0823529, 1)
-
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -0.5
-offset_right = 0.5
-offset_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 3.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="Limbs" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -485.0
+offset_top = 505.0
+offset_right = -45.0
+offset_bottom = 589.0
+grow_horizontal = 2
+rotation = 0.0401714
+scale = Vector2(2.23628, 0.843865)
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_xhatj")
+theme_override_font_sizes/font_size = 80
+text = "Limbs: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Brains" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 208.0
+offset_top = 23.0
+offset_right = 648.0
+offset_bottom = 107.0
+grow_horizontal = 2
+rotation = 0.00393009
+scale = Vector2(0.790505, 0.384128)
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_xhatj")
+theme_override_font_sizes/font_size = 80
+text = "Brains: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(579, 327)
 stream = ExtResource("9_nmi8n")
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="."]

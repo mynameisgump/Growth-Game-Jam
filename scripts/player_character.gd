@@ -15,9 +15,10 @@ var hvel : Vector3;
 @onready var gunshot : AudioStreamPlayer2D = $Gunshot;
 @onready var steptimer : Timer = $StepTimer;
 @onready var stepplayer : AudioStreamPlayer = $Footsteps
-
-#@onready var gun1 : Node3D = $Body/Head/Guns/Gun1
-#@onready var gun2 : Node3D = $Body/Head/Guns/Gun2
+@onready var hud : CanvasLayer = $HUD
+@onready var hud_health : Label = $HUD/Health
+@onready var hud_limbs : Label = $HUD/Limbs
+@onready var hud_brains : Label = $HUD/Brains
 
 @export var GRAVITY = -80;
 @export var MAX_SPEED: float = 10.0;
@@ -48,11 +49,19 @@ var LEAN_SPEED = 5;
 
 var held_gibs = 0;
 var health = 100;
+var brains = 0;
+var limbs = 0;
 
 func _physics_process(delta : float) -> void:
 	handle_input(delta);
 	handle_movement(delta);
 	fire();
+	
+	hud_health.text = "Health: "+str(health);
+	hud_limbs.text = "Limbs: "+str(limbs);
+	hud_brains.text = "Brains: "+str(brains);
+	
+	
 
 func is_moving():
 	return Input.is_action_pressed("move_left") or \
@@ -74,8 +83,12 @@ func fire():
 					print("Target:", target.name)
 					var part_hit = target.get_node("../../").name
 					print("Part Hit:", part_hit)
-					target.get_node("../../../../").damage(part_hit)
-
+					var dmg_arr = target.get_node("../../../../../").damage(part_hit)
+					limbs += dmg_arr[0]
+					brains += dmg_arr[1]
+					animation.play("HitMarker")
+					
+					
 func handle_input(delta : float) -> void:
 	
 	z_tilt_target = 0.0

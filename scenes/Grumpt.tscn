@@ -1,23 +1,227 @@
-[gd_scene load_steps=10 format=3 uid="uid://df4oybopuhqbe"]
+[gd_scene load_steps=14 format=3 uid="uid://df4oybopuhqbe"]
 
 [ext_resource type="Script" path="res://scripts/Grumpt.gd" id="1_uche2"]
 [ext_resource type="PackedScene" uid="uid://bde5i0sx0imq8" path="res://scenes/torso.tscn" id="2_bsvni"]
+[ext_resource type="Script" path="res://scenes/Legs.gd" id="3_784uy"]
 [ext_resource type="AudioStream" uid="uid://bs7yiwct5j0f5" path="res://assets/audio/fart.mp3" id="4_cqtyr"]
 [ext_resource type="AudioStream" uid="uid://bkw8k3lfvdhs0" path="res://assets/audio/Spawn_Quick_Trim.wav" id="5_6wv5w"]
+[ext_resource type="AudioStream" uid="uid://djs8gspllch7u" path="res://assets/audio/FleshHit.wav" id="7_endky"]
 [ext_resource type="PackedScene" uid="uid://jw1wfti0fcrq" path="res://scenes/leg.tscn" id="8_r6x7g"]
 
 [sub_resource type="Animation" id="Animation_331l1"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Torsos:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.32199, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Torsos:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Torsos:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Torsos/Torso:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Torsos/Torso:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Torsos/Torso:quaternion")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Quaternion(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_r3fmt"]
-resource_name = "Running"
+[sub_resource type="Animation" id="Animation_xocjb"]
+resource_name = "BeginRoll"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Torsos/Torso:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.97855, 0), Vector3(0, -0.885602, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Torsos/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_sf5lg"]
+resource_name = "Rolling"
 length = 4.0
-loop_mode = 1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Torsos/Torso:quaternion")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(0, 0, 0.707107, 0.707107), Quaternion(0.5, -0.5, -0.5, -0.5), Quaternion(0.707107, -0.707107, 1.54543e-08, 1.54543e-08), Quaternion(0.5, -0.5, 0.5, 0.5), Quaternion(5.61911e-09, 7.86746e-08, 0.707107, 0.707107), Quaternion(-0.5, 0.5, 0.5, 0.5), Quaternion(-0.707107, 0.707107, -3.65277e-08, -3.65277e-08), Quaternion(0.5, -0.5, 0.5, 0.5), Quaternion(-5.76012e-08, 5.76012e-08, 0.707107, 0.707107)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Torsos/Torso:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.867135, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4r4u1"]
+resource_name = "Hit"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.2, 0, 0), Vector3(0, 0, 0), Vector3(0.2, 0, 0), Vector3(0, 0, 0), Vector3(-0.2, 0, 0), Vector3(0, 0, 0), Vector3(0.2, 0, 0), Vector3(0, 0, 0), Vector3(-0.2, 0, 0), Vector3(0, 0, 0), Vector3(0.2, 0, 0), Vector3(0, 0, 0), Vector3(-0.2, 0, 0), Vector3(0, 0, 0), Vector3(0.2, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.95, 0.95, 0.95), Vector3(1.05, 1.05, 1.05), Vector3(0.95, 0.95, 0.95), Vector3(1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35nqj"]
 _data = {
+"BeginRoll": SubResource("Animation_xocjb"),
+"Hit": SubResource("Animation_4r4u1"),
 "RESET": SubResource("Animation_331l1"),
-"Running": SubResource("Animation_r3fmt")
+"Rolling": SubResource("Animation_sf5lg")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_olcl3"]
@@ -29,17 +233,26 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_uche2")
 
-[node name="Torsos" type="Node3D" parent="."]
+[node name="Body" type="Node3D" parent="."]
 
-[node name="Torso" parent="Torsos" instance=ExtResource("2_bsvni")]
+[node name="Torsos" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32199, 0)
 
-[node name="Legs" type="Node3D" parent="."]
+[node name="Torso" parent="Body/Torsos" instance=ExtResource("2_bsvni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 1
 
-[node name="Leg1" parent="Legs" instance=ExtResource("8_r6x7g")]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, -1, 0, 0.404394, 1.30387, 0)
+[node name="Legs" type="Node3D" parent="Body"]
+script = ExtResource("3_784uy")
 
-[node name="Leg2" parent="Legs" instance=ExtResource("8_r6x7g")]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.407967, 1.28745, 0)
+[node name="Leg1" parent="Body/Legs" instance=ExtResource("8_r6x7g")]
+transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, -1, 0.404394, 1.30387, 0)
+
+[node name="Leg2" parent="Body/Legs" instance=ExtResource("8_r6x7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.407967, 1.28745, 0)
+
+[node name="Leg" parent="Body/Legs" instance=ExtResource("8_r6x7g")]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.0391463, 1.63409, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -76,4 +289,9 @@ unit_size = 40.0
 max_distance = 100.0
 
 [node name="LegDisable" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33498, 0)
 stream = ExtResource("5_6wv5w")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25131, 0)
+stream = ExtResource("7_endky")

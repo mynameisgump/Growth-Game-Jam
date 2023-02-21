@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cy5hcvn07exky" path="res://assets/textures/Faces/displacement.png" id="2_ltetx"]
 [ext_resource type="Texture2D" uid="uid://caqgsrs1cqps8" path="res://assets/textures/Faces/normals.png" id="3_ty3nm"]
+[ext_resource type="Texture2D" uid="uid://dsbwcytqd6p88" path="res://assets/textures/ToxicSky1/albedo_beeg.png" id="4_104y7"]
 [ext_resource type="Texture2D" uid="uid://c23wofgbpi2j7" path="res://assets/textures/Faces/roughness.png" id="4_hidar"]
 
 [sub_resource type="Animation" id="Animation_0m2in"]
@@ -229,11 +230,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_r0h0h")
 
-[sub_resource type="ImageTexture" id="ImageTexture_ferng"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt7d0"]
 cull_mode = 1
-albedo_texture = SubResource("ImageTexture_ferng")
+albedo_texture = ExtResource("4_104y7")
 
 [node name="Gun" type="Node3D"]
 transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, 0.0277904, -0.223666, 0)

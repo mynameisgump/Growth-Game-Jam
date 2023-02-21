@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbl2ylk8sik82"]
+[gd_scene load_steps=21 format=3 uid="uid://cbl2ylk8sik82"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_v4483"]
 [ext_resource type="PackedScene" uid="uid://df4oybopuhqbe" path="res://scenes/Grumpt.tscn" id="2_10pl5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djfqq3hsgk8w4" path="res://scenes/player_character.tscn" id="4_3odhb"]
 [ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="5_g42tk"]
 [ext_resource type="AudioStream" uid="uid://cpujftt3x1nkw" path="res://assets/audio/ultimatum.mp3" id="7_7py1c"]
+[ext_resource type="AudioStream" uid="uid://b1lanrm3n0syl" path="res://assets/audio/Spawn_Trim.wav" id="8_upa3q"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s0mx5"]
 resource_local_to_scene = true
@@ -20,11 +21,11 @@ radiance_size = 1
 background_mode = 2
 background_color = Color(0.305882, 0.184314, 0.129412, 1)
 sky = SubResource("Sky_1ivcc")
-sky_rotation = Vector3(1.36136, 2.85885, 0)
+sky_rotation = Vector3(1.36136, -6.28319, 0)
 ambient_light_color = Color(0.368627, 0.254902, 0.160784, 1)
 tonemap_exposure = 2.0
 volumetric_fog_density = 0.0813
-volumetric_fog_albedo = Color(0.541176, 0.215686, 0.439216, 1)
+volumetric_fog_albedo = Color(0.541176, 0.588235, 0.439216, 1)
 volumetric_fog_emission = Color(0.14902, 0.113725, 0.0862745, 1)
 volumetric_fog_gi_inject = 1.07
 
@@ -60,6 +61,44 @@ material = ExtResource("3_nwwu7")
 size = Vector3(500, 0.1, 250)
 subdivide_width = 32
 subdivide_depth = 32
+
+[sub_resource type="Animation" id="Animation_gb20b"]
+resource_name = "Sky"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.36136, -6.28319, 0), Vector3(1.36136, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eig36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.36136, -6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmlwe"]
+_data = {
+"RESET": SubResource("Animation_eig36"),
+"Sky": SubResource("Animation_gb20b")
+}
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_v4483")
@@ -127,7 +166,7 @@ color = Color(1, 0.137255, 0.0823529, 1)
 [node name="Walls" type="Node3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, -0.796941, 0.604057, 0, -0.604057, -0.796941, 0, 73.5532, -345.818)
+transform = Transform3D(1, 0, 0, 0, -0.071323, 0.997453, 0, -0.997453, -0.071323, 0, 73.5532, -251.878)
 mesh = SubResource("BoxMesh_yy2bv")
 skeleton = NodePath("")
 
@@ -137,7 +176,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor2" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, -0.79653, -0.604599, 0, 0.604599, -0.79653, 0, 73.5532, 344.287)
+transform = Transform3D(1, 0, 0, 0, 0.00942448, -0.999955, 0, 0.999955, 0.00942448, 0, 73.5532, 244.084)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -147,7 +186,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor3" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(-2.28337e-08, -0.918288, 0.395914, -5.74456e-08, -0.395914, -0.918288, 1, -4.37114e-08, -4.37114e-08, -279.963, 73.5532, -3.14691)
+transform = Transform3D(-3.7709e-08, -0.991649, 0.128968, -4.89837e-08, -0.128968, -0.991649, 1, -4.37114e-08, -4.37114e-08, -252.142, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -157,7 +196,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor4" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(-6.45891e-08, 0.918288, -0.395914, -5.74456e-08, -0.395914, -0.918288, -1, -3.65679e-08, 7.83233e-08, 279.769, 73.5532, -3.14691)
+transform = Transform3D(-3.74839e-08, 0.999932, -0.011728, -7.7889e-08, -0.011728, -0.999932, -1, -3.65679e-08, 7.83233e-08, 242.391, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -171,3 +210,12 @@ editor_description = "Song from Emerald Chiptune:
 https://www.youtube.com/watch?v=Iiy17z4hmCE"
 stream = ExtResource("7_7py1c")
 volume_db = -4.0
+autoplay = true
+
+[node name="SpawnPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_upa3q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bmlwe")
+}
