@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Grumpt.gd" id="1_uche2"]
 [ext_resource type="PackedScene" uid="uid://bde5i0sx0imq8" path="res://scenes/torso.tscn" id="2_bsvni"]
-[ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="7_e0625"]
+[ext_resource type="AudioStream" uid="uid://bs7yiwct5j0f5" path="res://assets/audio/fart.mp3" id="4_cqtyr"]
+[ext_resource type="AudioStream" uid="uid://bkw8k3lfvdhs0" path="res://assets/audio/Spawn_Quick_Trim.wav" id="5_6wv5w"]
 [ext_resource type="PackedScene" uid="uid://jw1wfti0fcrq" path="res://scenes/leg.tscn" id="8_r6x7g"]
 
 [sub_resource type="Animation" id="Animation_331l1"]
@@ -22,12 +23,6 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_olcl3"]
 size = Vector3(1.5, 2, 1.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_emjur"]
-shader = ExtResource("7_e0625")
-shader_parameter/brightness = 0.935
-shader_parameter/contrast = 8.0
-shader_parameter/saturation = 0.91
-
 [node name="Grumpt" type="CharacterBody3D" groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0242882, 0)
 collision_layer = 4
@@ -41,7 +36,7 @@ script = ExtResource("1_uche2")
 [node name="Legs" type="Node3D" parent="."]
 
 [node name="Leg1" parent="Legs" instance=ExtResource("8_r6x7g")]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, -1, 0, 0.404394, 1.33819, 0)
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, -1, 0, 0.404394, 1.30387, 0)
 
 [node name="Leg2" parent="Legs" instance=ExtResource("8_r6x7g")]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.407967, 1.28745, 0)
@@ -59,15 +54,6 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02786, 0)
 shape = SubResource("BoxShape3D_olcl3")
 
-[node name="FleshPort" type="SubViewport" parent="."]
-size = Vector2i(1024, 1024)
-
-[node name="ColorRect" type="ColorRect" parent="FleshPort"]
-material = SubResource("ShaderMaterial_emjur")
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(1, 0.137255, 0.0823529, 1)
-
 [node name="PositionHelpers" type="Node3D" parent="."]
 
 [node name="LegPosition1" type="Marker3D" parent="PositionHelpers"]
@@ -81,3 +67,13 @@ transform = Transform3D(0.943778, 0, -0.33058, 0, 1, 0, 0.33058, 0, 0.943778, -0
 
 [node name="LegPosition4" type="Marker3D" parent="PositionHelpers"]
 transform = Transform3D(0.905339, 0, 0.424689, 0, 1, 0, -0.424689, 0, 0.905339, 0.190238, 1.3239, 0.347864)
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30072, 0)
+stream = ExtResource("4_cqtyr")
+volume_db = -10.0
+unit_size = 40.0
+max_distance = 100.0
+
+[node name="LegDisable" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_6wv5w")

@@ -44,8 +44,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y421y")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dqpjm"]
-height = 1.42641
-radius = 0.181241
+height = 1.40924
+radius = 0.167846
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_myaiu"]
 spread = 10.0
@@ -174,7 +174,7 @@ collision_layer = 16
 collision_mask = 3
 
 [node name="LegHit" type="CollisionShape3D" parent="LegMesh/StaticBody3D"]
-transform = Transform3D(-3.33333, -1.27602e-09, -5.03846e-07, 2.5484e-09, 3.33333, -4.65661e-10, 4.99655e-07, 9.31323e-10, -3.33333, 0.626826, -1.8603, 0.145371)
+transform = Transform3D(-3.33333, -1.21508e-09, -4.98258e-07, 6.33463e-09, 3.33333, 1.39698e-09, 4.99655e-07, -1.16415e-08, -3.33333, 0.497968, -1.91187, 0.145036)
 shape = SubResource("CylinderShape3D_dqpjm")
 
 [node name="BloodSpray" type="GPUParticles3D" parent="."]

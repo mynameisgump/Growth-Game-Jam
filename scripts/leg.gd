@@ -3,9 +3,10 @@ extends Node3D
 @onready var leg_mesh : MeshInstance3D = $LegMesh
 @onready var hitbox : CollisionShape3D = $LegMesh/StaticBody3D/LegHit
 @onready var blood_spray : GPUParticles3D = $BloodSpray
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var burn_mat = preload ("res://assets/materials/Burn_Mat.tres")
-var destroyed
+var destroyed = false;
 var burning = false;
 var cur_burn = 0;
 
@@ -24,6 +25,7 @@ func disable():
 	leg_mesh.set_surface_override_material(0,burn_mat);
 	burning=true;
 	destroyed = true;
+	animation_player.pause();
 
 func _process(delta):
 	if burning:

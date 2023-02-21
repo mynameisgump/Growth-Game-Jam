@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://6dl83td0ji3y"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="1_3aqv8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emjur"]
+shader = ExtResource("1_3aqv8")
+shader_parameter/brightness = 0.935
+shader_parameter/contrast = 8.0
+shader_parameter/saturation = 0.91
+
+[node name="FleshPort" type="SubViewport"]
+size = Vector2i(1024, 1024)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_emjur")
+offset_right = 1024.0
+offset_bottom = 1024.0
+color = Color(1, 0.137255, 0.0823529, 1)

@@ -5,7 +5,7 @@ extends Node3D
 @onready var blood_spray : GPUParticles3D = $BloodSpray
 
 var burn_mat = preload ("res://assets/materials/Burn_Mat.tres")
-var destroyed
+var destroyed = false;
 var burning = false;
 var cur_burn = 0;
 
