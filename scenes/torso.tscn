@@ -42,7 +42,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fukal")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v4p0q"]
-size = Vector3(1, 0.73945, 0.870287)
+size = Vector3(0.855524, 0.73945, 0.85008)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o61as"]
 spread = 14.05

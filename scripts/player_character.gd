@@ -14,11 +14,13 @@ var hvel : Vector3;
 @onready var gun1 : Node3D = $Body/Head/Guns/Gun1;
 @onready var gunshot : AudioStreamPlayer2D = $Gunshot;
 @onready var steptimer : Timer = $StepTimer;
+@onready var attacktimer : Timer = $AttackTimer
 @onready var stepplayer : AudioStreamPlayer = $Footsteps
 @onready var hud : CanvasLayer = $HUD
 @onready var hud_health : Label = $HUD/Health
 @onready var hud_limbs : Label = $HUD/Limbs
 @onready var hud_brains : Label = $HUD/Brains
+@onready var iFrames : Timer = $iFrames
 
 @export var GRAVITY = -80;
 @export var MAX_SPEED: float = 10.0;
@@ -52,6 +54,8 @@ var health = 100;
 var brains = 0;
 var limbs = 0;
 
+var gun_index = 1;
+
 func _physics_process(delta : float) -> void:
 	handle_input(delta);
 	handle_movement(delta);
@@ -71,22 +75,49 @@ func is_moving():
 
 
 func fire():
-	if Input.is_action_pressed("mouse_fire"):
-		var timer = gun1.get_node("GunTimer");
-		var animations = gun1.get_node("AnimationPlayer");
-		if timer.is_stopped() and not animations.is_playing():
-			animations.play("Fire");
-			gunshot.play();
-			if gun_raycast.is_colliding():
-				var target = gun_raycast.get_collider();
-				if target.is_in_group("Limbs"):
-					print("Target:", target.name)
-					var part_hit = target.get_node("../../").name
-					print("Part Hit:", part_hit)
-					var dmg_arr = target.get_node("../../../../../").damage(part_hit)
-					limbs += dmg_arr[0]
-					brains += dmg_arr[1]
-					animation.play("HitMarker")
+	if Input.is_action_just_pressed("mouse_fire"):
+		if attacktimer.is_stopped():
+			attacktimer.start();
+			var cur_gun = guns_node.get_node("Gun"+str(gun_index));
+			var gun_timer = cur_gun.get_node("GunTimer");
+			var gun_animations = cur_gun.get_node("AnimationPlayer");
+			if gun_timer.is_stopped():
+				gun_timer.start()
+				gun_animations.play("Fire");
+				gunshot.play();
+				if gun_index == 2:
+					gun_index = 1;
+				else:
+					gun_index += 1;
+				
+				if gun_raycast.is_colliding():
+					var target = gun_raycast.get_collider();
+					if target.is_in_group("Limbs"):
+						print("Target:", target.name)
+						var part_hit = target.get_node("../../").name
+						print("Part Hit:", part_hit)
+						var dmg_arr = target.get_node("../../../../../").damage(part_hit)
+						limbs += dmg_arr[0]
+						brains += dmg_arr[1]
+						animation.play("HitMarker")
+					
+		
+		#var gun_timer = gun1.get_node("GunTimer");
+#		var gun_animations = gun1.get_node("AnimationPlayer");
+#		if gun_timer.is_stopped():
+#			gun_timer.start()
+#			gun_animations.play("Fire");
+#			gunshot.play();
+#			if gun_raycast.is_colliding():
+#				var target = gun_raycast.get_collider();
+#				if target.is_in_group("Limbs"):
+#					print("Target:", target.name)
+#					var part_hit = target.get_node("../../").name
+#					print("Part Hit:", part_hit)
+#					var dmg_arr = target.get_node("../../../../../").damage(part_hit)
+#					limbs += dmg_arr[0]
+#					brains += dmg_arr[1]
+#					animation.play("HitMarker")
 					
 					
 func handle_input(delta : float) -> void:

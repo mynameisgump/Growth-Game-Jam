@@ -2,17 +2,19 @@ extends CharacterBody3D
 
 @onready var legs : Node3D = $Body/Legs
 @onready var torsos : Node3D = $Body/Torsos
+@onready var teef : Node3D = $Body/Teef;
 @onready var nav_agent : NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var animation_player : AnimationPlayer = $AnimationPlayer;
 @onready var hurt_box : CollisionShape3D = $HurtBox;
 @onready var death_sound : AudioStreamPlayer3D = $DeathSound;
 @onready var leg_sound : AudioStreamPlayer3D = $LegDisable;
 @onready var hit_sound : AudioStreamPlayer3D = $HitSound;
+@onready var hum_sound : AudioStreamPlayer3D = $Hum;
 
 @export var movement_speed : float = 4.0
 
 var movement_delta : float
-var SPEED = 3.0;
+var SPEED = 8.0;
 var dead = false;
 var torso_burning = false;
 var cur_torso_burn = 0;
@@ -26,6 +28,7 @@ func update_rotation(target):
 	self.look_at(target)
 
 func die():
+	hum_sound.stop()
 	if not dead:
 		death_sound.play()
 		hurt_box.disabled = true
@@ -39,13 +42,14 @@ func die():
 	
 
 func _ready():
-	
+	hum_sound.play()
 	health = legs.get_children().size()*2+1;
 	for leg in legs.get_children():
 		var speed = randf_range(0.8,1.2)
 		var leg_animations = leg.get_node("AnimationPlayer")
 		leg_animations.speed_scale = speed;
 		leg_animations.play("RunHard1");
+	teef.get_node("TeefAnimation").play("Chattin");
 
 func _physics_process(delta):
 	

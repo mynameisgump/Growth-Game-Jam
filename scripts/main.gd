@@ -5,6 +5,7 @@ extends Node3D
 @onready var spawns_node = $Spawns
 @onready var spawn_noise : AudioStreamPlayer3D = $SpawnPlayer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var enemies : Node3D = $Enemies
 var spawning = true;
 var spawns_arr
 var Enemy = preload ("res://scenes/Grumpt.tscn")
@@ -19,6 +20,7 @@ func _physics_process(delta):
 	
 	if spawning:
 		if spawn_timer.is_stopped():
+			enemies.queue_free()
 			var rand_spawn = spawns_arr[randi() % spawns_arr.size()];
 			spawn_timer.start();
 			var new_grumpt = Enemy.instantiate();

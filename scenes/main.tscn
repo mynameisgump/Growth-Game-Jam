@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbl2ylk8sik82"]
+[gd_scene load_steps=24 format=3 uid="uid://cbl2ylk8sik82"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_v4483"]
 [ext_resource type="PackedScene" uid="uid://df4oybopuhqbe" path="res://scenes/Grumpt.tscn" id="2_10pl5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://c8fbstovowvsw" path="res://assets/materials/Plane_Basic_Mat.tres" id="3_nwwu7"]
 [ext_resource type="PackedScene" uid="uid://djfqq3hsgk8w4" path="res://scenes/player_character.tscn" id="4_3odhb"]
 [ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="5_g42tk"]
+[ext_resource type="Material" uid="uid://cemkv6be3u2s1" path="res://assets/materials/Flesh.tres" id="6_pwptv"]
 [ext_resource type="AudioStream" uid="uid://cpujftt3x1nkw" path="res://assets/audio/ultimatum.mp3" id="7_7py1c"]
 [ext_resource type="AudioStream" uid="uid://b1lanrm3n0syl" path="res://assets/audio/Spawn_Trim.wav" id="8_upa3q"]
 
@@ -43,6 +44,9 @@ subdivide_depth = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikqme"]
 size = Vector3(500, 0.1, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xbigu"]
+size = Vector3(1, 3, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1st0d"]
 shader = ExtResource("5_g42tk")
@@ -100,6 +104,8 @@ _data = {
 "Sky": SubResource("Animation_gb20b")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_rq041"]
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_v4483")
 
@@ -116,9 +122,6 @@ position = Vector2(578, 328)
 [node name="Sprite2D" type="Sprite2D" parent="Hud"]
 position = Vector2(578, 328)
 scale = Vector2(-0.25, -0.25)
-
-[node name="Grumpt" parent="." instance=ExtResource("2_10pl5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686233, -11.2578)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_i7cg8")
@@ -145,14 +148,34 @@ one_shot = true
 [node name="Spawn4" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.0867, 0, -26.7315)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawns/Spawn4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61514, 0)
+mesh = SubResource("BoxMesh_xbigu")
+surface_material_override/0 = ExtResource("6_pwptv")
+
 [node name="Spawn3" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8009, 0, 27.108)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawns/Spawn3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61514, 0)
+mesh = SubResource("BoxMesh_xbigu")
+surface_material_override/0 = ExtResource("6_pwptv")
 
 [node name="Spawn2" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3924, 0, 25.9785)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawns/Spawn2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61514, 0)
+mesh = SubResource("BoxMesh_xbigu")
+surface_material_override/0 = ExtResource("6_pwptv")
+
 [node name="Spawn1" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8009, 0, -26.7315)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawns/Spawn1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61514, 0)
+mesh = SubResource("BoxMesh_xbigu")
+surface_material_override/0 = ExtResource("6_pwptv")
 
 [node name="FleshPort" type="SubViewport" parent="."]
 size = Vector2i(1024, 1024)
@@ -219,3 +242,14 @@ stream = ExtResource("8_upa3q")
 libraries = {
 "": SubResource("AnimationLibrary_bmlwe")
 }
+
+[node name="FleshTower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.2174)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FleshTower"]
+mesh = SubResource("BoxMesh_rq041")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Grumpt" parent="Enemies" instance=ExtResource("2_10pl5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686233, -11.2578)

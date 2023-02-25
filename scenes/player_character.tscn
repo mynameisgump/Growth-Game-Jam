@@ -91,6 +91,9 @@ script = ExtResource("3_2avmf")
 [node name="Gun1" parent="Body/Head/Guns" instance=ExtResource("5_atse1")]
 transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.004, -0.405, 0.095)
 
+[node name="Gun2" parent="Body/Head/Guns" instance=ExtResource("5_atse1")]
+transform = Transform3D(-0.1, 0, 2.53518e-07, 0, 0.1, 0, -2.53518e-07, 0, -0.1, -0.167, -0.405, 0.095)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_jebfa")
@@ -134,6 +137,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+color = Color(1, 0.421053, 0.430134, 1)
 
 [node name="Limbs" type="Label" parent="HUD"]
 anchors_preset = 5
@@ -186,3 +190,9 @@ volume_db = -10.0
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="iFrames" type="Timer" parent="."]

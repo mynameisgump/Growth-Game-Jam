@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cgnsv1nf0lxvp"]
+
+[ext_resource type="Texture2D" uid="uid://cxfnxftsrr77g" path="res://assets/textures/Gums/albedo.png" id="1_hi5u4"]
+[ext_resource type="Texture2D" uid="uid://celfponpr4cs6" path="res://assets/textures/Gums/displacement.png" id="2_2tibm"]
+[ext_resource type="Texture2D" uid="uid://bhaa5cqou5n8v" path="res://assets/textures/Gums/roughness.png" id="3_bm47f"]
+[ext_resource type="Texture2D" uid="uid://odo48c0l5cbf" path="res://assets/textures/Gums/normals.png" id="4_ig637"]
+
+[resource]
+albedo_texture = ExtResource("1_hi5u4")
+metallic = 1.0
+metallic_specular = 0.0
+metallic_texture = ExtResource("3_bm47f")
+normal_enabled = true
+normal_scale = 4.94
+normal_texture = ExtResource("4_ig637")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_texture = ExtResource("2_2tibm")
+uv1_scale = Vector3(3, 3, 3)

@@ -272,5 +272,4 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vt7d0")
 
 [node name="GunTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
