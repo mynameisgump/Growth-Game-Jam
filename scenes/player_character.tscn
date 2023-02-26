@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://djfqq3hsgk8w4"]
+[gd_scene load_steps=22 format=3 uid="uid://djfqq3hsgk8w4"]
 
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://scripts/Head.gd" id="2_lvxga"]
@@ -59,6 +59,49 @@ _data = {
 "RevolverFire2": SubResource("Animation_w0d15")
 }
 
+[sub_resource type="Animation" id="Animation_oabkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elements:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(556, 304)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaveLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(242, -280)]
+}
+
+[sub_resource type="Animation" id="Animation_t37tm"]
+resource_name = "Wave_Start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaveLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(242, -280), Vector2(240, 674)]
+}
+
 [sub_resource type="Animation" id="Animation_0ks01"]
 resource_name = "Hurt"
 length = 0.5
@@ -76,25 +119,11 @@ tracks/0/keys = {
 "values": [Vector2(556, 304), Vector2(522, 302), Vector2(606, 304), Vector2(487, 378), Vector2(649, 349), Vector2(448, 263), Vector2(588, 320), Vector2(521, 388), Vector2(450, 287), Vector2(670, 364), Vector2(556, 304)]
 }
 
-[sub_resource type="Animation" id="Animation_oabkv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Elements:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(556, 304)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpatj"]
 _data = {
 "Hurt": SubResource("Animation_0ks01"),
-"RESET": SubResource("Animation_oabkv")
+"RESET": SubResource("Animation_oabkv"),
+"Wave_Start": SubResource("Animation_t37tm")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xl5xu"]
@@ -160,13 +189,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+color = Color(1, 0.473684, 0.48194, 1)
 
-[node name="Label" type="Label" parent="HUD"]
-visible = false
-offset_left = 282.0
-offset_top = 184.0
-offset_right = 989.0
-offset_bottom = 453.0
+[node name="WaveLabel" type="Label" parent="HUD"]
+offset_left = 242.0
+offset_top = -280.0
+offset_right = 949.0
+offset_bottom = -11.0
 theme_override_fonts/font = ExtResource("6_lp74c")
 theme_override_font_sizes/font_size = 250
 text = "Wave 1"
@@ -183,10 +212,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 19.9999
-offset_bottom = 20.0
+offset_left = 556.0
+offset_top = 304.0
+offset_right = 596.0
+offset_bottom = 344.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -253,6 +282,11 @@ theme_override_font_sizes/font_size = 80
 text = "Health: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WaveAnimation" type="AnimationPlayer" parent="HUD"]
+libraries = {
+"": SubResource("AnimationLibrary_qpatj")
+}
 
 [node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(579, 327)

@@ -6,13 +6,14 @@ extends CharacterBody3D
 @onready var nav_agent : NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var animation_player : AnimationPlayer = $AnimationPlayer;
 @onready var hurt_box : CollisionShape3D = $HurtBox;
+@onready var true_hurt_box : CollisionShape3D = $DamageBox/HurtBox
 @onready var death_sound : AudioStreamPlayer3D = $DeathSound;
 @onready var leg_sound : AudioStreamPlayer3D = $LegDisable;
 @onready var hit_sound : AudioStreamPlayer3D = $HitSound;
 @onready var hum_sound : AudioStreamPlayer3D = $Hum;
 @onready var death_timer : Timer = $DeathTimer
 
-@export var SPEED = 8.0;
+@export var SPEED = 15.0;
 
 var movement_delta : float
 
@@ -33,6 +34,7 @@ func die():
 	if not dead:
 		death_sound.play()
 		hurt_box.disabled = true
+		true_hurt_box.disabled = true;
 		for leg in legs.get_children():
 			if leg.destroyed == false:
 				leg.disable()
@@ -63,6 +65,7 @@ func _physics_process(delta):
 	
 	if legs.legs_alive == false and rollin==false:
 		print("No Lags")
+		teef.disable();
 		rollin = true;
 		animation_player.play("BeginRoll")
 		animation_player.queue("Rolling")

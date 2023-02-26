@@ -19,16 +19,29 @@ func _ready():
 	if wave_start == false:
 		wavetimer.start();
 		wave_start = true;
+		#
+		player.get_node("HUD/WaveAnimation").play("Wave_Start");
+		player.get_node("HUD/HUDAnimations").play("RESET");
 	animation_player.play("Sky")
 	spawns_arr = spawns_node.get_children()
 
 func new_wave():
 	enemies_spawned = 0;
 	current_wave += 1;
+	wave_enemies = current_wave * 5;
+	player.current_wave = 2;
+	player.get_node("HUD/WaveAnimation").play("Wave_Start")
+	wavetimer.start()
+	wave_start = true;
 
 func _physics_process(delta):
 	get_tree().call_group('enemy', "update_target_location", player.global_transform.origin)
 	get_tree().call_group('enemy', "update_rotation", player.global_transform.origin)
+	
+	if enemies_spawned >= wave_enemies and enemies.get_children().size() == 0:
+		print("Calling New Wave")
+		wave_start = false
+		self.new_wave();
 	
 	if wavetimer.is_stopped() and wave_start:
 		if spawning and spawn_timer.is_stopped() and enemies_spawned < wave_enemies:
@@ -37,6 +50,8 @@ func _physics_process(delta):
 				var rand_spawn = spawns_arr[randi() % spawns_arr.size()];
 				spawn_timer.start();
 				var new_grumpt = Enemy.instantiate();
+				var rand_speed = randf_range(7.0, 13.0)
+				new_grumpt.SPEED = rand_speed
 				enemies.add_child(new_grumpt);
 				spawn_noise.position = rand_spawn.position;
 				spawn_noise.play();

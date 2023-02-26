@@ -20,10 +20,12 @@ var hvel : Vector3;
 @onready var hud_health : Label = $HUD/Elements/Health
 @onready var hud_limbs : Label = $HUD/Elements/Limbs
 @onready var hud_brains : Label = $HUD/Elements/Brains
+@onready var hud_wave : Label = $HUD/WaveLabel
 @onready var iFrames : Timer = $iFrames
 @onready var hitbox : CollisionShape3D = $HitBox;
 @onready var hurt_noise : AudioStreamPlayer = $HurtNoise;
 @onready var hud_animations : AnimationPlayer = $HUD/HUDAnimations;
+@onready var wave_animation : AnimationPlayer = $HUD/WaveAnimation
 
 @export var GRAVITY = -80;
 @export var MAX_SPEED: float = 10.0;
@@ -33,7 +35,7 @@ var hvel : Vector3;
 @export var MAX_ACCEL = 150.0;
 @export var DEACCEL= 0.86;
 @export var MAX_SLOPE_ANGLE = 40;
-@export var WAVE = 1;
+@export var current_wave = 1;
 
 # Speed Parameter
 const SPEED = 7.0;
@@ -68,7 +70,7 @@ func _physics_process(delta : float) -> void:
 	hud_health.text = "Health: "+str(health);
 	hud_limbs.text = "Limbs: "+str(limbs);
 	hud_brains.text = "Brains: "+str(brains);
-	
+	hud_wave.text = "Wave "+str(current_wave);
 	
 
 func damage():

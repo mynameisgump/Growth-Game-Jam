@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://cbl2ylk8sik82"]
+[gd_scene load_steps=22 format=3 uid="uid://cbl2ylk8sik82"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_v4483"]
-[ext_resource type="PackedScene" uid="uid://df4oybopuhqbe" path="res://scenes/Grumpt.tscn" id="2_10pl5"]
 [ext_resource type="Texture2D" uid="uid://7rd08hldshxl" path="res://assets/GreySkybox.png" id="2_n8vgv"]
 [ext_resource type="Material" uid="uid://c8fbstovowvsw" path="res://assets/materials/Plane_Basic_Mat.tres" id="3_nwwu7"]
 [ext_resource type="PackedScene" uid="uid://djfqq3hsgk8w4" path="res://scenes/player_character.tscn" id="4_3odhb"]
@@ -242,8 +241,6 @@ libraries = {
 }
 
 [node name="Enemies" type="Node3D" parent="."]
-
-[node name="Grumpt" parent="Enemies" instance=ExtResource("2_10pl5")]
 
 [node name="WaveTimer" type="Timer" parent="."]
 wait_time = 10.0
