@@ -14,6 +14,8 @@ var wave_start = false;
 var current_wave = 1;
 var enemies_spawned = 0;
 var wave_enemies = 5;
+var spawn_max = 5;
+var spawn_min = 1;
 
 func _ready():
 	if wave_start == false:
@@ -28,6 +30,7 @@ func _ready():
 func new_wave():
 	enemies_spawned = 0;
 	current_wave += 1;
+	spawn_timer.wait_time = max(1, 6 - current_wave);
 	wave_enemies = current_wave * 5;
 	player.current_wave = 2;
 	player.get_node("HUD/WaveAnimation").play("Wave_Start")
@@ -39,8 +42,7 @@ func _physics_process(delta):
 	get_tree().call_group('enemy', "update_rotation", player.global_transform.origin)
 	
 	if enemies_spawned >= wave_enemies and enemies.get_children().size() == 0:
-		print("Calling New Wave")
-		wave_start = false
+		wave_start = false;
 		self.new_wave();
 	
 	if wavetimer.is_stopped() and wave_start:

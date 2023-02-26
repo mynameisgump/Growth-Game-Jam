@@ -556,3 +556,4 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="area_entered" from="DamageBox" to="." method="_on_damage_box_area_entered"]
+[connection signal="area_exited" from="DamageBox" to="." method="_on_damage_box_area_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://djfqq3hsgk8w4"]
+[gd_scene load_steps=29 format=3 uid="uid://djfqq3hsgk8w4"]
 
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://scripts/Head.gd" id="2_lvxga"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://23n5dfgehx50" path="res://scenes/GunArm.tscn" id="5_atse1"]
 [ext_resource type="FontFile" uid="uid://docy1l2qvdjjp" path="res://assets/Fonts/OptimusPrinceps.ttf" id="6_lp74c"]
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/Fonts/DivineLight.woff" id="6_xhatj"]
+[ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="7_bt4mw"]
 [ext_resource type="AudioStream" uid="uid://oql4e5n11ecf" path="res://assets/audio/GumpyHurt.wav" id="8_5yce8"]
 [ext_resource type="AudioStream" uid="uid://22g44jgpkrs5" path="res://assets/audio/Jelly_Step_Smol.mp3" id="9_6uaaa"]
 [ext_resource type="AudioStream" uid="uid://df1ym7eva6o0a" path="res://assets/audio/Fire.mp3" id="9_nmi8n"]
+[ext_resource type="AudioStream" uid="uid://culsb1sknknkr" path="res://assets/audio/GumpyDead.wav" id="10_3uraa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
@@ -59,6 +61,68 @@ _data = {
 "RevolverFire2": SubResource("Animation_w0d15")
 }
 
+[sub_resource type="Animation" id="Animation_gllg3"]
+resource_name = "death"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.72367, 0), Vector3(0, 0.661891, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g8pit"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.72367, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntxim"]
+_data = {
+"RESET": SubResource("Animation_g8pit"),
+"death": SubResource("Animation_gllg3")
+}
+
 [sub_resource type="Animation" id="Animation_oabkv"]
 length = 0.001
 tracks/0/type = "value"
@@ -96,10 +160,10 @@ tracks/0/path = NodePath("WaveLabel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.5, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(242, -280), Vector2(240, 674)]
+"values": [Vector2(605, -301), Vector2(122, 387), Vector2(1131, 403), Vector2(604, 1216)]
 }
 
 [sub_resource type="Animation" id="Animation_0ks01"]
@@ -125,6 +189,15 @@ _data = {
 "RESET": SubResource("Animation_oabkv"),
 "Wave_Start": SubResource("Animation_t37tm")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kna06"]
+shader = ExtResource("7_bt4mw")
+shader_parameter/brightness = 0.935
+shader_parameter/contrast = 8.0
+shader_parameter/saturation = 0.91
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1hn0u"]
+viewport_path = NodePath("HUD/FleshPort")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xl5xu"]
 size = Vector3(1, 1.95306, 1.0964)
@@ -171,6 +244,11 @@ libraries = {
 "": SubResource("AnimationLibrary_jebfa")
 }
 
+[node name="DeathAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ntxim")
+}
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Hud" type="Node2D" parent="HUD"]
@@ -189,7 +267,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-color = Color(1, 0.473684, 0.48194, 1)
+color = Color(1, 0.0526316, 0.0674923, 1)
 
 [node name="WaveLabel" type="Label" parent="HUD"]
 offset_left = 242.0
@@ -212,10 +290,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 556.0
-offset_top = 304.0
-offset_right = 596.0
-offset_bottom = 344.0
+offset_left = -404.0
+offset_top = -236.0
+offset_right = -364.0
+offset_bottom = -196.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -225,10 +303,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 208.0
-offset_top = -281.0
-offset_right = 648.0
-offset_bottom = -197.0
+offset_left = 775.0
+offset_top = -104.0
+offset_right = 1215.0
+offset_bottom = -20.0
 grow_horizontal = 2
 rotation = 0.00393009
 scale = Vector2(0.790505, 0.384128)
@@ -246,13 +324,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -485.0
-offset_top = 201.0
-offset_right = -45.0
-offset_bottom = 285.0
+offset_left = -126.0
+offset_top = 444.0
+offset_right = 314.0
+offset_bottom = 528.0
 grow_horizontal = 2
 rotation = 0.0401714
-scale = Vector2(2.23628, 0.843865)
+scale = Vector2(1.05643, 2.64426)
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -267,13 +345,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -546.0
-offset_top = -24.0
-offset_right = -106.0
-offset_bottom = 60.0
+offset_left = -507.0
+offset_top = -102.0
+offset_right = -66.9999
+offset_bottom = -18.0
 grow_horizontal = 2
-rotation = -0.697608
-scale = Vector2(0.865333, 0.547077)
+rotation = -0.246432
+scale = Vector2(1.76922, 1.57471)
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -288,6 +366,21 @@ libraries = {
 "": SubResource("AnimationLibrary_qpatj")
 }
 
+[node name="FleshPort" type="SubViewport" parent="HUD"]
+size = Vector2i(1024, 1024)
+
+[node name="ColorRect" type="ColorRect" parent="HUD/FleshPort"]
+material = SubResource("ShaderMaterial_kna06")
+offset_right = 1024.0
+offset_bottom = 1024.0
+color = Color(1, 0.137255, 0.0823529, 1)
+
+[node name="FleshRect" type="Sprite2D" parent="HUD"]
+visible = false
+position = Vector2(1100, 630)
+scale = Vector2(2.212, 2.212)
+texture = SubResource("ViewportTexture_1hn0u")
+
 [node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(579, 327)
 stream = ExtResource("9_nmi8n")
@@ -298,6 +391,9 @@ stream = ExtResource("8_5yce8")
 [node name="Footsteps" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_6uaaa")
 volume_db = -10.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_3uraa")
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -317,3 +413,5 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00729, 0)
 shape = SubResource("BoxShape3D_xl5xu")
+
+[connection signal="player_death" from="." to="Body/Head/Guns" method="_on_player_character_player_death"]

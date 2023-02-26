@@ -25,8 +25,12 @@ var hvel : Vector3;
 @onready var hitbox : CollisionShape3D = $HitBox;
 @onready var hurt_noise : AudioStreamPlayer = $HurtNoise;
 @onready var hud_animations : AnimationPlayer = $HUD/HUDAnimations;
-@onready var wave_animation : AnimationPlayer = $HUD/WaveAnimation
+@onready var wave_animation : AnimationPlayer = $HUD/WaveAnimation;
+@onready var death_animation : AnimationPlayer = $DeathAnimation;
+@onready var death_sound : AudioStreamPlayer = $DeathSound;
 
+
+signal player_death;
 @export var GRAVITY = -80;
 @export var MAX_SPEED: float = 10.0;
 # Original Default of 18
@@ -59,19 +63,26 @@ var held_gibs = 0;
 var health = 100;
 var brains = 0;
 var limbs = 0;
-
+var alive = true;
+var death_scene = false;
 var gun_index = 1;
 
 func _physics_process(delta : float) -> void:
-	handle_input(delta);
-	handle_movement(delta);
-	fire();
-	
 	hud_health.text = "Health: "+str(health);
 	hud_limbs.text = "Limbs: "+str(limbs);
 	hud_brains.text = "Brains: "+str(brains);
 	hud_wave.text = "Wave "+str(current_wave);
 	
+	if alive:
+		handle_input(delta);
+		handle_movement(delta);
+		fire();
+
+	else:
+		if death_scene == false:
+			death_animation.play("death");
+			death_sound.play();
+			death_scene = true;
 
 func damage():
 	if iFrames.is_stopped():
@@ -79,6 +90,9 @@ func damage():
 		health -= 5;
 		hurt_noise.play()
 		hud_animations.play("Hurt")
+		if health <=0:
+			alive = false;
+			emit_signal("player_death");
 
 func is_moving():
 	return Input.is_action_pressed("move_left") or \
@@ -113,7 +127,7 @@ func fire():
 						limbs += dmg_arr[0]
 						brains += dmg_arr[1]
 						animation.play("HitMarker")
-					
+				
 					
 func handle_input(delta : float) -> void:
 	

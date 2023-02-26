@@ -11,16 +11,24 @@ var mouse_mov_y
 
 var last_mouse_position
 var current_mouse_position
-
-
+var alive = true;
+func all_guns_free():
+	var all_guns = self.get_children();
+	var free = true;
+	for gun in all_guns:
+		var gun_timer = gun.get_node("GunTimer")
+		if gun_timer.is_stopped == false:
+			free = false
+			break
+	return free
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and alive:
 		
 		mouse_mov_x = -event.relative.x
 		mouse_mov_y = event.relative.y
 
 func _process(delta):
-	if mouse_mov_x != null and mouse_mov_y!=null:
+	if mouse_mov_x != null and mouse_mov_y!=null and alive:
 
 		var movement_x = mouse_mov_x*sway_amount
 		var movement_y = mouse_mov_y*sway_amount
@@ -37,3 +45,7 @@ func _process(delta):
 		
 		rotation = rotation.lerp(finalPosition,sway_smooth_amount*delta)
 	
+
+
+func _on_player_character_player_death():
+	alive = false;

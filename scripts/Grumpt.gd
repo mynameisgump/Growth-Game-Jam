@@ -22,6 +22,8 @@ var torso_burning = false;
 var cur_torso_burn = 0;
 var health;
 var rollin = false;
+var damaging_player = false;
+var player_area;
 
 func update_target_location(target):
 	nav_agent.target_position = target;
@@ -61,6 +63,7 @@ func _physics_process(delta):
 		self.queue_free();
 	
 	if health <= 0:
+		damaging_player = false;
 		self.die();
 	
 	if legs.legs_alive == false and rollin==false:
@@ -77,6 +80,7 @@ func _physics_process(delta):
 
 		velocity = new_velocity
 		move_and_slide()
+	damage_player()
 		
 func damage(hit):
 	if not rollin:
@@ -97,6 +101,17 @@ func damage(hit):
 	return [limbs,kills]
 
 
+func damage_player():
+	if damaging_player:
+		var player = player_area.get_parent()
+		player.damage()
+
 func _on_damage_box_area_entered(area):
-	var player = area.get_parent()
-	player.damage()
+	player_area = area;
+	damaging_player = true;
+
+
+
+func _on_damage_box_area_exited(area):
+	damaging_player = false;
+	pass # Replace with function body.
