@@ -1,6 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://irxnntyk0nlb"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://irxnntyk0nlb"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/Grumpt_Burn.gdshader" id="1_fobrh"]
+[ext_resource type="Texture2D" uid="uid://clkfo1nlu6ugo" path="res://assets/textures/Frens/normals.png" id="2_eodc2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ojlg8"]
 
@@ -9,14 +10,15 @@ width = 1280
 height = 1280
 noise = SubResource("FastNoiseLite_ojlg8")
 
-[sub_resource type="ImageTexture" id="ImageTexture_px2y1"]
+[sub_resource type="ImageTexture" id="ImageTexture_1ubt5"]
 
 [resource]
-render_priority = 0
+render_priority = 1
 shader = ExtResource("1_fobrh")
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/emission_amount = 0.0
 shader_parameter/burn_size = 0.0
 shader_parameter/dissolve_amount = 0.0
-shader_parameter/texture_albedo = SubResource("ImageTexture_px2y1")
+shader_parameter/texture_albedo = SubResource("ImageTexture_1ubt5")
+shader_parameter/texture_normal = ExtResource("2_eodc2")
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_vmco3")

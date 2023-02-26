@@ -7,7 +7,6 @@
 
 [resource]
 resource_local_to_scene = true
-cull_mode = 1
 albedo_texture = ExtResource("1_m3p6j")
 roughness_texture = ExtResource("4_gwnpv")
 roughness_texture_channel = 4

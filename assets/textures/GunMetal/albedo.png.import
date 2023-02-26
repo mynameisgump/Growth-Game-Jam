@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1koeae7kdth1"
-path.s3tc="res://.godot/imported/others_0001_normal_opengl_2k.png-936e4fda9d3d4ab600ba23e5fe7299c7.s3tc.ctex"
+uid="uid://bwk55bjosl41w"
+path.s3tc="res://.godot/imported/albedo.png-bb45a0600b80cbceb524b3621c72b800.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/Flesh/others_0001_normal_opengl_2k.png"
-dest_files=["res://.godot/imported/others_0001_normal_opengl_2k.png-936e4fda9d3d4ab600ba23e5fe7299c7.s3tc.ctex"]
+source_file="res://assets/textures/GunMetal/albedo.png"
+dest_files=["res://.godot/imported/albedo.png-bb45a0600b80cbceb524b3621c72b800.s3tc.ctex"]
 
 [params]
 

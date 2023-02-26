@@ -95,6 +95,9 @@ func damage():
 		if health <=0:
 			alive = false;
 			emit_signal("player_death");
+			for gun in guns_node.get_children():
+				var gun_animation = gun.get_node("AnimationPlayer");
+				gun_animation.play("death");
 
 func is_moving():
 	return Input.is_action_pressed("move_left") or \
