@@ -1,16 +1,34 @@
-[gd_scene load_steps=15 format=3 uid="uid://djfqq3hsgk8w4"]
+[gd_scene load_steps=21 format=3 uid="uid://djfqq3hsgk8w4"]
 
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://scripts/Head.gd" id="2_lvxga"]
 [ext_resource type="Script" path="res://scripts/Guns.gd" id="3_2avmf"]
 [ext_resource type="PackedScene" uid="uid://23n5dfgehx50" path="res://scenes/GunArm.tscn" id="5_atse1"]
+[ext_resource type="FontFile" uid="uid://docy1l2qvdjjp" path="res://assets/Fonts/OptimusPrinceps.ttf" id="6_lp74c"]
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/Fonts/DivineLight.woff" id="6_xhatj"]
+[ext_resource type="AudioStream" uid="uid://oql4e5n11ecf" path="res://assets/audio/GumpyHurt.wav" id="8_5yce8"]
 [ext_resource type="AudioStream" uid="uid://22g44jgpkrs5" path="res://assets/audio/Jelly_Step_Smol.mp3" id="9_6uaaa"]
 [ext_resource type="AudioStream" uid="uid://df1ym7eva6o0a" path="res://assets/audio/Fire.mp3" id="9_nmi8n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fi26c"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b45a5"]
+
+[sub_resource type="Animation" id="Animation_f227j"]
+resource_name = "HitMarker"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0.0156863, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_fpluh"]
 length = 0.001
@@ -33,22 +51,6 @@ resource_name = "RevolverFire1"
 [sub_resource type="Animation" id="Animation_w0d15"]
 resource_name = "RevolverFire2"
 
-[sub_resource type="Animation" id="Animation_f227j"]
-resource_name = "HitMarker"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0, 0.0156863, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jebfa"]
 _data = {
 "HitMarker": SubResource("Animation_f227j"),
@@ -57,11 +59,52 @@ _data = {
 "RevolverFire2": SubResource("Animation_w0d15")
 }
 
+[sub_resource type="Animation" id="Animation_0ks01"]
+resource_name = "Hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elements:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(556, 304), Vector2(522, 302), Vector2(606, 304), Vector2(487, 378), Vector2(649, 349), Vector2(448, 263), Vector2(588, 320), Vector2(521, 388), Vector2(450, 287), Vector2(670, 364), Vector2(556, 304)]
+}
+
+[sub_resource type="Animation" id="Animation_oabkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elements:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(556, 304)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpatj"]
+_data = {
+"Hurt": SubResource("Animation_0ks01"),
+"RESET": SubResource("Animation_oabkv")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xl5xu"]
+size = Vector3(1, 1.95306, 1.0964)
+
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_qhbey")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="HitBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_fi26c")
 
@@ -103,26 +146,6 @@ libraries = {
 
 [node name="Hud" type="Node2D" parent="HUD"]
 
-[node name="Health" type="Label" parent="HUD"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -546.0
-offset_top = 280.0
-offset_right = -106.0
-offset_bottom = 364.0
-grow_horizontal = 2
-rotation = -0.697608
-scale = Vector2(0.865333, 0.547077)
-size_flags_horizontal = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_xhatj")
-theme_override_font_sizes/font_size = 80
-text = "Health: 100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,36 +160,46 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-color = Color(1, 0.421053, 0.430134, 1)
 
-[node name="Limbs" type="Label" parent="HUD"]
-anchors_preset = 5
+[node name="Label" type="Label" parent="HUD"]
+visible = false
+offset_left = 282.0
+offset_top = 184.0
+offset_right = 989.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("6_lp74c")
+theme_override_font_sizes/font_size = 250
+text = "Wave 1"
+
+[node name="HUDAnimations" type="AnimationPlayer" parent="HUD"]
+libraries = {
+"": SubResource("AnimationLibrary_qpatj")
+}
+
+[node name="Elements" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -485.0
-offset_top = 505.0
-offset_right = -45.0
-offset_bottom = 589.0
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 19.9999
+offset_bottom = 20.0
 grow_horizontal = 2
-rotation = 0.0401714
-scale = Vector2(2.23628, 0.843865)
-size_flags_horizontal = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_xhatj")
-theme_override_font_sizes/font_size = 80
-text = "Limbs: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
+grow_vertical = 2
+size_flags_horizontal = 4
 
-[node name="Brains" type="Label" parent="HUD"]
+[node name="Brains" type="Label" parent="HUD/Elements"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 208.0
-offset_top = 23.0
+offset_top = -281.0
 offset_right = 648.0
-offset_bottom = 107.0
+offset_bottom = -197.0
 grow_horizontal = 2
 rotation = 0.00393009
 scale = Vector2(0.790505, 0.384128)
@@ -179,9 +212,54 @@ text = "Brains: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Limbs" type="Label" parent="HUD/Elements"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -485.0
+offset_top = 201.0
+offset_right = -45.0
+offset_bottom = 285.0
+grow_horizontal = 2
+rotation = 0.0401714
+scale = Vector2(2.23628, 0.843865)
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_xhatj")
+theme_override_font_sizes/font_size = 80
+text = "Limbs: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="Label" parent="HUD/Elements"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -546.0
+offset_top = -24.0
+offset_right = -106.0
+offset_bottom = 60.0
+grow_horizontal = 2
+rotation = -0.697608
+scale = Vector2(0.865333, 0.547077)
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_xhatj")
+theme_override_font_sizes/font_size = 80
+text = "Health: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(579, 327)
 stream = ExtResource("9_nmi8n")
+
+[node name="HurtNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5yce8")
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_6uaaa")
@@ -196,3 +274,12 @@ wait_time = 0.2
 one_shot = true
 
 [node name="iFrames" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurt" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00729, 0)
+shape = SubResource("BoxShape3D_xl5xu")

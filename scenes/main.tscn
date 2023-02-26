@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbl2ylk8sik82"]
+[gd_scene load_steps=23 format=3 uid="uid://cbl2ylk8sik82"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_v4483"]
 [ext_resource type="PackedScene" uid="uid://df4oybopuhqbe" path="res://scenes/Grumpt.tscn" id="2_10pl5"]
@@ -66,6 +66,21 @@ size = Vector3(500, 0.1, 250)
 subdivide_width = 32
 subdivide_depth = 32
 
+[sub_resource type="Animation" id="Animation_eig36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.36136, -6.28319, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_gb20b"]
 resource_name = "Sky"
 length = 60.0
@@ -83,28 +98,11 @@ tracks/0/keys = {
 "values": [Vector3(1.36136, -6.28319, 0), Vector3(1.36136, 6.28319, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_eig36"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WorldEnvironment:environment:sky_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.36136, -6.28319, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bmlwe"]
 _data = {
 "RESET": SubResource("Animation_eig36"),
 "Sky": SubResource("Animation_gb20b")
 }
-
-[sub_resource type="BoxMesh" id="BoxMesh_rq041"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_v4483")
@@ -189,7 +187,7 @@ color = Color(1, 0.137255, 0.0823529, 1)
 [node name="Walls" type="Node3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, -0.071323, 0.997453, 0, -0.997453, -0.071323, 0, 73.5532, -251.878)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 73.5532, -82.5891)
 mesh = SubResource("BoxMesh_yy2bv")
 skeleton = NodePath("")
 
@@ -199,7 +197,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor2" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 0.00942448, -0.999955, 0, 0.999955, 0.00942448, 0, 73.5532, 244.084)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 73.5532, 61.4095)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -209,7 +207,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor3" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(-3.7709e-08, -0.991649, 0.128968, -4.89837e-08, -0.128968, -0.991649, 1, -4.37114e-08, -4.37114e-08, -252.142, 73.5532, -3.14691)
+transform = Transform3D(1.31134e-07, -1, -4.37114e-08, -3.82137e-15, 4.37114e-08, -1, 1, 1.31134e-07, 1.91069e-15, -99.1265, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -219,7 +217,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor4" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(-3.74839e-08, 0.999932, -0.011728, -7.7889e-08, -0.011728, -0.999932, -1, -3.65679e-08, 7.83233e-08, 242.391, 73.5532, -3.14691)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, -3.82137e-15, 4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 101.775, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -243,13 +241,10 @@ libraries = {
 "": SubResource("AnimationLibrary_bmlwe")
 }
 
-[node name="FleshTower" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.2174)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FleshTower"]
-mesh = SubResource("BoxMesh_rq041")
-
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Grumpt" parent="Enemies" instance=ExtResource("2_10pl5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686233, -11.2578)
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

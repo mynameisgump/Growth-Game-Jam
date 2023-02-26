@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Area3D
 
 @onready var legs : Node3D = $Body/Legs
 @onready var torsos : Node3D = $Body/Torsos
@@ -10,7 +10,6 @@ extends CharacterBody3D
 @onready var leg_sound : AudioStreamPlayer3D = $LegDisable;
 @onready var hit_sound : AudioStreamPlayer3D = $HitSound;
 @onready var hum_sound : AudioStreamPlayer3D = $Hum;
-@onready var death_timer : Timer = $DeathTimer
 
 @export var SPEED = 8.0;
 
@@ -41,8 +40,8 @@ func die():
 				torso.disable()
 		if teef.destroyed == false:
 			teef.disable()
-		death_timer.start();
 		dead = true;
+	
 
 func _ready():
 	hum_sound.play()
@@ -55,8 +54,6 @@ func _ready():
 	teef.get_node("TeefAnimation").play("Chattin");
 
 func _physics_process(delta):
-	if dead and death_timer.is_stopped():
-		self.queue_free();
 	
 	if health <= 0:
 		self.die();
@@ -92,8 +89,3 @@ func damage(hit):
 	if health <= 0:
 		kills += 1
 	return [limbs,kills]
-
-
-func _on_damage_box_area_entered(area):
-	var player = area.get_parent()
-	player.damage()

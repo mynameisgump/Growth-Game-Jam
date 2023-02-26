@@ -277,7 +277,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.930901, 0)
 rotation_edit_mode = 1
 
 [node name="Armature" type="Node3D" parent="Body"]
-transform = Transform3D(-0.999996, 0.00282731, 3.55274e-15, -0.00282731, -0.999996, -3.83309e-18, 3.55271e-15, -1.38778e-17, 1, 0, 0.721863, 0)
+transform = Transform3D(-0.999996, 0.00282732, 3.55273e-15, -0.00282732, -0.999996, -3.83309e-18, 3.5527e-15, -1.38778e-17, 1, 0, 0.721863, 0)
 rotation_edit_mode = 1
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Body/Armature"]

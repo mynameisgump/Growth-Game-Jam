@@ -17,10 +17,13 @@ var hvel : Vector3;
 @onready var attacktimer : Timer = $AttackTimer
 @onready var stepplayer : AudioStreamPlayer = $Footsteps
 @onready var hud : CanvasLayer = $HUD
-@onready var hud_health : Label = $HUD/Health
-@onready var hud_limbs : Label = $HUD/Limbs
-@onready var hud_brains : Label = $HUD/Brains
+@onready var hud_health : Label = $HUD/Elements/Health
+@onready var hud_limbs : Label = $HUD/Elements/Limbs
+@onready var hud_brains : Label = $HUD/Elements/Brains
 @onready var iFrames : Timer = $iFrames
+@onready var hitbox : CollisionShape3D = $HitBox;
+@onready var hurt_noise : AudioStreamPlayer = $HurtNoise;
+@onready var hud_animations : AnimationPlayer = $HUD/HUDAnimations;
 
 @export var GRAVITY = -80;
 @export var MAX_SPEED: float = 10.0;
@@ -30,6 +33,7 @@ var hvel : Vector3;
 @export var MAX_ACCEL = 150.0;
 @export var DEACCEL= 0.86;
 @export var MAX_SLOPE_ANGLE = 40;
+@export var WAVE = 1;
 
 # Speed Parameter
 const SPEED = 7.0;
@@ -67,6 +71,13 @@ func _physics_process(delta : float) -> void:
 	
 	
 
+func damage():
+	if iFrames.is_stopped():
+		iFrames.start()
+		health -= 5;
+		hurt_noise.play()
+		hud_animations.play("Hurt")
+
 func is_moving():
 	return Input.is_action_pressed("move_left") or \
 	Input.is_action_pressed("move_right") or \
@@ -100,24 +111,6 @@ func fire():
 						limbs += dmg_arr[0]
 						brains += dmg_arr[1]
 						animation.play("HitMarker")
-					
-		
-		#var gun_timer = gun1.get_node("GunTimer");
-#		var gun_animations = gun1.get_node("AnimationPlayer");
-#		if gun_timer.is_stopped():
-#			gun_timer.start()
-#			gun_animations.play("Fire");
-#			gunshot.play();
-#			if gun_raycast.is_colliding():
-#				var target = gun_raycast.get_collider();
-#				if target.is_in_group("Limbs"):
-#					print("Target:", target.name)
-#					var part_hit = target.get_node("../../").name
-#					print("Part Hit:", part_hit)
-#					var dmg_arr = target.get_node("../../../../../").damage(part_hit)
-#					limbs += dmg_arr[0]
-#					brains += dmg_arr[1]
-#					animation.play("HitMarker")
 					
 					
 func handle_input(delta : float) -> void:
