@@ -11,10 +11,14 @@ extends CharacterBody3D
 @onready var leg_sound : AudioStreamPlayer3D = $LegDisable;
 @onready var hit_sound : AudioStreamPlayer3D = $HitSound;
 @onready var hum_sound : AudioStreamPlayer3D = $Hum;
-@onready var death_timer : Timer = $DeathTimer
+@onready var death_timer : Timer = $DeathTimer;
+@onready var leg_positions : Node3D = $PositionHelpers;
 
 @export var SPEED = 15.0;
+@export var total_legs = 4;
 
+
+var leg_scene = preload ("res://scenes/leg.tscn");
 var movement_delta : float
 
 var dead = false;
@@ -49,6 +53,13 @@ func die():
 		dead = true;
 
 func _ready():
+	for i in range(total_legs):
+		
+		var new_leg: Node3D = leg_scene.instantiate();
+		new_leg.position = leg_positions.get_child(i).position;
+		new_leg.quaternion = leg_positions.get_child(i).quaternion;
+		new_leg.scale = leg_positions.get_child(i).scale;
+		legs.add_child(new_leg);
 	hum_sound.play()
 	health = legs.get_children().size()*2+1;
 	for leg in legs.get_children():

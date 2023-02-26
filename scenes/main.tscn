@@ -211,7 +211,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor3" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(1.31134e-07, -1, -4.37114e-08, -3.82137e-15, 4.37114e-08, -1, 1, 1.31134e-07, 1.91069e-15, -99.1265, 73.5532, -3.14691)
+transform = Transform3D(1.31134e-07, -1, -4.37114e-08, -3.82137e-15, 4.37114e-08, -1, 1, 1.31134e-07, 1.91069e-15, -73.4331, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
@@ -221,7 +221,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_ikqme")
 
 [node name="Floor4" type="MeshInstance3D" parent="Walls"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, -3.82137e-15, 4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 101.775, 73.5532, -3.14691)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, -3.82137e-15, 4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 85.9899, 73.5532, -3.14691)
 mesh = SubResource("BoxMesh_myd6u")
 skeleton = NodePath("")
 
