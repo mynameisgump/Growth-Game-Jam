@@ -1,9 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://b3xatfi2ovl40"]
+[gd_scene load_steps=31 format=3 uid="uid://b3xatfi2ovl40"]
 
 [ext_resource type="Script" path="res://scripts/Grumpt.gd" id="1_at5ig"]
 [ext_resource type="PackedScene" uid="uid://bde5i0sx0imq8" path="res://scenes/torso.tscn" id="2_2oif2"]
 [ext_resource type="Script" path="res://scenes/Legs.gd" id="3_lwav3"]
-[ext_resource type="PackedScene" uid="uid://jw1wfti0fcrq" path="res://scenes/leg.tscn" id="4_klahm"]
 [ext_resource type="Script" path="res://scenes/Teef.gd" id="5_7ltvl"]
 [ext_resource type="Material" uid="uid://cgnsv1nf0lxvp" path="res://assets/materials/Gums.tres" id="6_46yc5"]
 [ext_resource type="Texture2D" uid="uid://st2xtftu0j1n" path="res://assets/models/Image_0.png" id="7_hodm6"]
@@ -507,25 +506,6 @@ collision_mask = 2
 [node name="HurtBox" type="CollisionShape3D" parent="DamageBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02786, 0)
 shape = SubResource("BoxShape3D_lice7")
-
-[node name="Node3D" type="Node3D" parent="."]
-visible = false
-
-[node name="Leg1" parent="Node3D" instance=ExtResource("4_klahm")]
-transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, -1, 0.329082, 1.30387, -0.238455)
-visible = false
-
-[node name="Leg2" parent="Node3D" instance=ExtResource("4_klahm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.320408, 1.28745, -0.220322)
-visible = false
-
-[node name="Leg" parent="Node3D" instance=ExtResource("4_klahm")]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.0391463, 1.63409, 0)
-visible = false
-
-[node name="Leg3" parent="Node3D" instance=ExtResource("4_klahm")]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.0391463, 1.09363, 0)
-visible = false
 
 [node name="PositionHelpers" type="Node3D" parent="."]
 

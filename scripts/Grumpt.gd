@@ -54,7 +54,7 @@ func die():
 
 func _ready():
 	for i in range(total_legs):
-		
+		print("NewLeg")
 		var new_leg: Node3D = leg_scene.instantiate();
 		new_leg.position = leg_positions.get_child(i).position;
 		new_leg.quaternion = leg_positions.get_child(i).quaternion;

@@ -6,9 +6,10 @@ extends Node3D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var enemies : Node3D = $Enemies
 @onready var wavetimer : Timer = $WaveTimer
+@onready var ultimatum : AudioStreamPlayer3D = $Ultimatum
 var spawning = true;
 # var spawns_arr
-var Enemy = preload ("res://scenes/Grumpt.tscn");
+var Enemy = preload ("res://scenes/Grumpt_Multi_Lag.tscn");
 var Spawn = preload ("res://scenes/Spawn.tscn");
 var wave_start = false;
 var current_wave = 1;
@@ -88,9 +89,18 @@ func _physics_process(delta):
 				var rand_spawn = spawns_node.get_children()[randi() % spawns_node.get_children().size()];
 				spawn_timer.start();
 				var new_grumpt = Enemy.instantiate();
+				var rand_legs = randi_range(1,4);
+				new_grumpt.total_legs = rand_legs
 				var rand_speed = randf_range(7.0, 13.0)
 				new_grumpt.SPEED = rand_speed
 				enemies.add_child(new_grumpt);
 				rand_spawn.get_node("SpawnPlayer").position = rand_spawn.position;
 				rand_spawn.get_node("SpawnPlayer").play();
 				new_grumpt.set_position(rand_spawn.position);
+
+
+func _on_player_character_player_death():
+	ultimatum.stop()
+	for enemy in enemies.get_children():
+		enemy.get_node("Hum").stop()
+			
