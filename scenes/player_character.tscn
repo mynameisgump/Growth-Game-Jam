@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://djfqq3hsgk8w4"]
+[gd_scene load_steps=32 format=3 uid="uid://djfqq3hsgk8w4"]
 
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="1_qhbey"]
 [ext_resource type="Script" path="res://scripts/Head.gd" id="2_lvxga"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://docy1l2qvdjjp" path="res://assets/Fonts/OptimusPrinceps.ttf" id="6_lp74c"]
 [ext_resource type="FontFile" uid="uid://fhh5huedyra5" path="res://assets/Fonts/DivineLight.woff" id="6_xhatj"]
 [ext_resource type="Shader" path="res://scripts/shaders/heart.gdshader" id="7_bt4mw"]
+[ext_resource type="Shader" path="res://scripts/shaders/HUDShader.gdshader" id="7_nar3a"]
 [ext_resource type="AudioStream" uid="uid://oql4e5n11ecf" path="res://assets/audio/GumpyHurt.wav" id="8_5yce8"]
 [ext_resource type="AudioStream" uid="uid://22g44jgpkrs5" path="res://assets/audio/Jelly_Step_Smol.mp3" id="9_6uaaa"]
 [ext_resource type="AudioStream" uid="uid://df1ym7eva6o0a" path="res://assets/audio/Fire.mp3" id="9_nmi8n"]
@@ -63,8 +64,6 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_gllg3"]
 resource_name = "death"
-length = 0.25
-step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,6 +87,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 1.72367, 0), Vector3(0, 0.661891, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HUD/Elements/Brains:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(795, -104), Vector2(-959, 945)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HUD/Elements/Limbs:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-106, 444), Vector2(1079, -693)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HUD/Elements/Health:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-487, -102), Vector2(982, 1070)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HUD/Elements/Sanitization:material:shader_parameter/sensitivity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HUD/Elements/Score:material:shader_parameter/sensitivity")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_g8pit"]
@@ -115,6 +174,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 1.72367, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HUD/Elements/Brains:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(795, -104)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HUD/Elements/Limbs:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-106, 444)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HUD/Elements/Health:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-487, -102)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HUD/Elements/Sanitization:material:shader_parameter/sensitivity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HUD/Elements/Score:material:shader_parameter/sensitivity")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ntxim"]
@@ -189,6 +308,14 @@ _data = {
 "RESET": SubResource("Animation_oabkv"),
 "Wave_Start": SubResource("Animation_t37tm")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jg21x"]
+shader = ExtResource("7_nar3a")
+shader_parameter/sensitivity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sdsah"]
+shader = ExtResource("7_nar3a")
+shader_parameter/sensitivity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kna06"]
 shader = ExtResource("7_bt4mw")
@@ -305,7 +432,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 775.0
 offset_top = -104.0
-offset_right = 1215.0
+offset_right = 1215.01
 offset_bottom = -20.0
 grow_horizontal = 2
 rotation = 0.00393009
@@ -326,7 +453,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -126.0
 offset_top = 444.0
-offset_right = 314.0
+offset_right = 314.013
 offset_bottom = 528.0
 grow_horizontal = 2
 rotation = 0.0401714
@@ -347,7 +474,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -507.0
 offset_top = -102.0
-offset_right = -66.9999
+offset_right = -66.9909
 offset_bottom = -18.0
 grow_horizontal = 2
 rotation = -0.246432
@@ -360,6 +487,39 @@ theme_override_font_sizes/font_size = 80
 text = "Health: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sanitization" type="Label" parent="HUD/Elements"]
+material = SubResource("ShaderMaterial_jg21x")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -10.9375
+anchor_top = -0.175
+anchor_right = -10.9125
+anchor_bottom = -0.175
+offset_left = -35.5
+offset_top = -52.0
+offset_right = 35.5
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(12.5601, 7.09922)
+theme_override_fonts/font = ExtResource("6_xhatj")
+text = "You 
+have 
+been 
+Sanitized"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" type="Label" parent="HUD/Elements"]
+material = SubResource("ShaderMaterial_sdsah")
+layout_mode = 0
+offset_left = 370.0
+offset_top = 89.0
+offset_right = 422.0
+offset_bottom = 115.0
+scale = Vector2(5.58208, 6.16745)
+text = "Score: "
 
 [node name="WaveAnimation" type="AnimationPlayer" parent="HUD"]
 libraries = {

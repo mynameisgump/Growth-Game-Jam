@@ -6,7 +6,7 @@ extends Node3D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var enemies : Node3D = $Enemies
 @onready var wavetimer : Timer = $WaveTimer
-@onready var ultimatum : AudioStreamPlayer3D = $Ultimatum
+@onready var ultimatum : AudioStreamPlayer = $Ultimatum
 var spawning = true;
 # var spawns_arr
 var Enemy = preload ("res://scenes/Grumpt_Multi_Lag.tscn");
@@ -69,7 +69,7 @@ func new_wave():
 	current_wave += 1;
 	spawn_timer.wait_time = max(1, 6 - current_wave);
 	wave_enemies = current_wave * 5;
-	player.current_wave = 2;
+	player.current_wave = current_wave;
 	player.get_node("HUD/WaveAnimation").play("Wave_Start")
 	wavetimer.start()
 	wave_start = true;

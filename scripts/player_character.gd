@@ -21,6 +21,7 @@ var hvel : Vector3;
 @onready var hud_limbs : Label = $HUD/Elements/Limbs
 @onready var hud_brains : Label = $HUD/Elements/Brains
 @onready var hud_wave : Label = $HUD/WaveLabel
+@onready var hud_score : Label = $HUD/Elements/Score
 @onready var iFrames : Timer = $iFrames
 @onready var hitbox : CollisionShape3D = $HitBox;
 @onready var hurt_noise : AudioStreamPlayer = $HurtNoise;
@@ -72,6 +73,7 @@ func _physics_process(delta : float) -> void:
 	hud_limbs.text = "Limbs: "+str(limbs);
 	hud_brains.text = "Brains: "+str(brains);
 	hud_wave.text = "Wave "+str(current_wave);
+	hud_score.text = "Score: "+str((limbs*100+brains*50)*current_wave);
 	
 	if alive:
 		handle_input(delta);
@@ -85,7 +87,7 @@ func _physics_process(delta : float) -> void:
 			death_scene = true;
 
 func damage():
-	if iFrames.is_stopped():
+	if iFrames.is_stopped() and alive:
 		iFrames.start()
 		health -= 5;
 		hurt_noise.play()
