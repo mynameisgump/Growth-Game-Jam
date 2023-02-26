@@ -3,31 +3,52 @@ extends Node3D
 @onready var player = $PlayerCharacter
 @onready var spawn_timer = $SpawnTimer
 @onready var spawns_node = $Spawns
-@onready var spawn_noise : AudioStreamPlayer3D = $SpawnPlayer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var enemies : Node3D = $Enemies
 @onready var wavetimer : Timer = $WaveTimer
 var spawning = true;
 var spawns_arr
-var Enemy = preload ("res://scenes/Grumpt.tscn")
+var Enemy = preload ("res://scenes/Grumpt.tscn");
+var Spawn = preload ("res://scenes/Spawn.tscn");
 var wave_start = false;
 var current_wave = 1;
 var enemies_spawned = 0;
 var wave_enemies = 5;
 var spawn_max = 5;
 var spawn_min = 1;
+var total_spawn_locs = 4;
 
 func _ready():
+	randomize()
 	if wave_start == false:
 		wavetimer.start();
 		wave_start = true;
-		#
 		player.get_node("HUD/WaveAnimation").play("Wave_Start");
 		player.get_node("HUD/HUDAnimations").play("RESET");
 	animation_player.play("Sky")
+	for spawn in range(total_spawn_locs):
+		var x = randf_range(-60,60);
+		var z = randf_range(-60,60);
+		var new_spawn: Marker3D = Spawn.instantiate();
+		new_spawn.name = "Spawn"+str(spawn);
+		new_spawn.set_position(Vector3(x,0,z))
+		spawns_node.add_child(new_spawn)
+	
 	spawns_arr = spawns_node.get_children()
+	print(spawns_arr)
 
 func new_wave():
+	total_spawn_locs += 2;
+	for spawn in spawns_node.get_children():
+		spawn.queue_free()
+	for spawn in range(total_spawn_locs):
+		var x = randf_range(-60,60);
+		var z = randf_range(-60,60);
+		var new_spawn: Marker3D = Spawn.instantiate();
+		new_spawn.name = "Spawn"+str(spawn);
+		new_spawn.set_position(Vector3(x,0,z))
+		spawns_node.add_child(new_spawn)
+	spawns_arr = spawns_node.get_children()
 	enemies_spawned = 0;
 	current_wave += 1;
 	spawn_timer.wait_time = max(1, 6 - current_wave);
@@ -55,6 +76,6 @@ func _physics_process(delta):
 				var rand_speed = randf_range(7.0, 13.0)
 				new_grumpt.SPEED = rand_speed
 				enemies.add_child(new_grumpt);
-				spawn_noise.position = rand_spawn.position;
-				spawn_noise.play();
+				rand_spawn.get_node("SpawnPlayer").position = rand_spawn.position;
+				rand_spawn.get_node("SpawnPlayer").play();
 				new_grumpt.set_position(rand_spawn.position);
